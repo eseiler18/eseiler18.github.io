@@ -58,17 +58,22 @@
   body,
 ))
 
+// Round, clickable icon (like on the website). Icons: cv/icons/*.svg (Font Awesome Free).
+#let icon-link(url, name) = link(url, box(
+  width: 17pt, height: 17pt, radius: 50%, stroke: 0.6pt + hair, inset: 3.6pt,
+  align(center + horizon, image("icons/" + name + ".svg", height: 100%)),
+))
+
 #let header(data, phone: none) = {
   let p = data.profile
   let l = p.links
-  let contact = (
-    link("mailto:" + l.email, l.email),
-    link(data.site, data.site.replace("https://", "")),
-    ..if l.at("github", default: "") != "" { (link(l.github, "github.com/" + l.github.split("/").last()),) },
-    ..if l.at("scholar", default: "") != "" { (link(l.scholar, "Google Scholar"),) },
-    ..if l.at("linkedin", default: "") != "" { (link(l.linkedin, "LinkedIn"),) },
-    ..if phone != none and phone != "" { (phone,) },
-  )
+  let icons = (
+    ("website", data.site),
+    ("github", l.at("github", default: "")),
+    ("scholar", l.at("scholar", default: "")),
+    ("linkedin", l.at("linkedin", default: "")),
+    ("orcid", l.at("orcid", default: "")),
+  ).filter(((_, url)) => url != "")
   grid(
     columns: (1fr, auto),
     align: (left + bottom, right + bottom),
@@ -77,14 +82,19 @@
       #v(-0.9em)
       #text(size: 10.5pt, fill: soft)[#p.role #h(0.3em)#text(fill: hair, "|")#h(0.3em) #p.affiliation]
     ],
-    text(size: 8.8pt, fill: soft, contact.join(linebreak())),
+    [
+      #set text(size: 9pt, fill: soft)
+      #link("mailto:" + l.email, l.email)
+      #if phone != none and phone != "" [ \ #phone]
+      #v(-0.25em)
+      #icons.map(((name, url)) => icon-link(url, name)).join(h(0.3em))
+    ],
   )
   v(0.45em)
   line(length: 100%, stroke: 1.4pt + accent)
   v(0.2em)
 }
 
-// Section title across the page, followed by a hairline.
 #let section(title) = {
   v(1.1em)
   block(below: 0.85em, sticky: true, grid(  // sticky: never alone at the bottom of a page
