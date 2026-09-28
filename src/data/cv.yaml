@@ -23,15 +23,19 @@ education:
       - "First-author [NeurIPS 2026](/projects/fcso) paper (FCSO): identified *manifold drift*, the failure of gradient-based optimization in the latent spaces of large 3D generative models."
       - "Designed an optimizer–corrector method alternating free gradient steps with guided flow-matching corrections, keeping shapes valid without retraining the generative prior."
       - "Scaled it from vector latent spaces to large 3D models (VecSet, Hunyuan3D) on aerodynamic drag, compliance and volume optimization."
+  - period: 2023 – 2024
+    title: Master's Thesis
+    org: Harvard University, IACS (Prof. Pavlos Protopapas)
+    logo: /img/logos/harvard.png
+    place: Boston, USA
+    details:
+      - "Proposed [Stiff Transfer Learning for PINNs](/projects/stiff-transfer-pinns): a multi-head PINN trained in low-stiffness regimes, transferred in one shot to highly stiff ODEs and PDEs."
+      - "More accurate and faster than PINN baselines, with efficiency comparable to implicit numerical solvers."
   - period: 2021 – 2024
     title: M.Sc. in Computational Science and Engineering
     org: EPFL
     logo: /img/logos/epfl.svg
     place: Lausanne, Switzerland
-    details:
-      - "Master's thesis at Harvard University, IACS (Prof. Pavlos Protopapas), 2023–2024."
-      - "Proposed [Stiff Transfer Learning for PINNs](/projects/stiff-transfer-pinns): a multi-head PINN trained in low-stiffness regimes, transferred in one shot to highly stiff ODEs and PDEs."
-      - "More accurate and faster than PINN baselines, with efficiency comparable to implicit numerical solvers."
   - period: 2018 – 2021
     title: B.Sc. in Environmental Sciences and Engineering
     org: EPFL
