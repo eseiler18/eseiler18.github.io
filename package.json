@@ -4,9 +4,11 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && bash scripts/build_cv.sh",
     "preview": "astro preview",
-    "sync": "python3 scripts/sync_scholar.py"
+    "sync": "python3 scripts/sync_scholar.py",
+    "cv": "astro build && bash scripts/build_cv.sh",
+    "cv:private": "astro build && bash scripts/build_cv.sh --private"
   },
   "dependencies": {
     "astro": "^7.3.5",

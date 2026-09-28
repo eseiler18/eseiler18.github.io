@@ -1,15 +1,19 @@
 ---
 import Base from '../layouts/Base.astro';
 import AuthorList from '../components/AuthorList.astro';
-import { profile, cv, getPublications, isSet, venueLine, type CvEntry } from '../lib/data';
+import { profile, cv, getPublications, isSet, venueLine, md, type CvEntry } from '../lib/data';
 
 const pubs = await getPublications();
-const sections: [string, CvEntry[]][] = [
-  ['Education', cv.education],
-  ['Fellowships & Awards', cv.awards],
-  ['Experience', cv.experience],
-  ['Teaching', cv.teaching],
-];
+const sections = (
+  [
+    ['Education', cv.education],
+    ['Fellowships & Awards', cv.awards],
+    ['Research Experience', cv.experience.filter((e) => e.kind !== 'industry')],
+    ['Industry Experience', cv.experience.filter((e) => e.kind === 'industry')],
+    ['Mentoring', cv.mentoring ?? []],
+    ['Teaching', cv.teaching],
+  ] as [string, CvEntry[]][]
+).filter(([, entries]) => entries.length > 0);
 ---
 
 <Base title="CV" description={`Curriculum vitae of ${profile.name}.`}>
@@ -20,7 +24,10 @@ const sections: [string, CvEntry[]][] = [
     </div>
     {
       isSet(profile.links.cv) ? (
-        <a class="pill solid" href={profile.links.cv} download>Download PDF</a>
+        <div class="downloads">
+          <a class="pill solid" href={profile.links.cv} download>Resume (1 page)</a>
+          <a class="pill" href="/cv/Emilien_Seiler_CV.pdf" download>Full CV</a>
+        </div>
       ) : (
         <span class="pill placeholder" title="An updated PDF version is on its way">PDF version coming soon</span>
       )
@@ -43,7 +50,7 @@ const sections: [string, CvEntry[]][] = [
               </div>
               {e.details && (
                 <ul>
-                  {e.details.map((d) => <li>{d}</li>)}
+                  {e.details.map((d) => <li set:html={md(d)} />)}
                 </ul>
               )}
             </div>
@@ -89,6 +96,7 @@ const sections: [string, CvEntry[]][] = [
   .cv-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
   h1 { font-size: 2.1rem; margin: 0 0 0.3rem; }
   .cv-head p { margin: 0; }
+  .downloads { display: flex; gap: 0.5rem; flex-wrap: wrap; }
   .placeholder { cursor: default; color: var(--text-faint); border-style: dashed; }
   .placeholder:hover { color: var(--text-faint); border-color: var(--line); }
   h2 { border-bottom: 1px solid var(--line); padding-bottom: 0.4rem; }

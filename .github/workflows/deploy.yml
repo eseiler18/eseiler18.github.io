@@ -19,6 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: typst-community/setup-typst@40d32bb6ccb235bd7f5164cb47cfd40a5ea3a314 # v5.2.0
+        with:
+          typst-version: 0.15.1
+      # Runs `npm run build`: the site, then the two PDF CVs (scripts/build_cv.sh).
       - uses: withastro/action@3eafd002e65cc31b4f0eae0bb05450d521562247 # v6.1.3
 
   deploy:

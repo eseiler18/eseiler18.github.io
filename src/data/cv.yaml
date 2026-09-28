@@ -1,5 +1,11 @@
-# Source of the HTML CV (/cv). Publications are pulled automatically from
-# publications.json, so they are not listed here. Newest first everywhere.
+# Source of the CV: the HTML page (/cv) AND the two PDFs (cv/resume.typ, cv/full.typ).
+# Publications are pulled automatically from publications.json, so they are not listed here.
+# Newest first everywhere.
+#
+# Optional fields per entry:
+#   resume: false   -> not in the 1-page resume (still in the full CV and on the site)
+#   short: "..."    -> one-line version used in the 1-page resume instead of `details`
+#   kind: research | industry   (experience only; groups entries in the PDFs)
 
 education:
   - period: 2025 – present
@@ -8,13 +14,14 @@ education:
     logo: /img/logos/epfl.svg
     place: Lausanne, Switzerland
     details:
-      - "Advisor: Prof. Pascal Fua."
-      - "Topic: shape optimization in the latent spaces of 3D generative models."
+      - "Advisor: Prof. Pascal Fua. EDIC Fellowship."
+      - "Research: 3D computer vision, shape representation, 3D generative models and shape optimization."
   - period: 2023 – 2024
     title: Master's Thesis
     org: Harvard University
     logo: /img/logos/harvard.png
     place: Boston, USA
+    resume: false   # merged into the Harvard research entry in the resume
     details:
       - "Physics-Informed Neural Networks for Solving Differential Equations in Stiffness Regimes: A Multi-Head Architecture and Transfer Learning Approach. Grade 5.75/6."
   - period: 2021 – 2024
@@ -22,6 +29,7 @@ education:
     org: EPFL
     logo: /img/logos/epfl.svg
     place: Lausanne, Switzerland
+    short: "GPA 5.42/6. Master's thesis at Harvard University (grade 5.75/6)."
     details:
       - "GPA 5.42/6."
   - period: 2018 – 2021
@@ -29,6 +37,7 @@ education:
     org: EPFL
     logo: /img/logos/epfl.svg
     place: Lausanne, Switzerland
+    short: ""
     details:
       - "GPA 5.2/6."
 
@@ -41,53 +50,78 @@ awards:
       - "One-year fellowship for incoming PhD students, allowing them to explore research labs before choosing a thesis director."
 
 experience:
-  - period: 2025
-    title: Data Engineer
-    org: Liom
-    logo: /img/logos/liom.svg
-    place: Zürich, Switzerland
+  - period: 2025 – present
+    title: PhD Researcher
+    org: EPFL, Computer Vision Laboratory
+    logo: /img/logos/epfl.svg
+    place: Lausanne, Switzerland
+    kind: research
     details:
-      - "Built a cloud-based data platform at a startup working on non-invasive glucose monitoring."
+      - "First-author NeurIPS 2026 paper (FCSO): identified *manifold drift*, the failure of gradient-based optimization in the latent spaces of large 3D generative models."
+      - "Designed an optimizer–corrector method alternating free gradient steps with guided flow-matching corrections, keeping shapes valid without retraining the generative prior."
+      - "Scaled it from vector latent spaces to large 3D models (VecSet, Hunyuan3D) on aerodynamic drag, compliance and volume optimization."
   - period: 2023 – 2024
-    title: Research Assistant
-    org: Harvard University
+    title: Research Assistant (Master's thesis)
+    org: Harvard University, IACS (Prof. Pavlos Protopapas)
     logo: /img/logos/harvard.png
     place: Boston, USA
+    kind: research
     details:
-      - "Developed a new method addressing the failure modes of vanilla PINNs in stiff systems."
+      - "Proposed Stiff Transfer Learning for PINNs: a multi-head PINN trained in low-stiffness regimes, transferred in one shot to highly stiff ODEs and PDEs."
+      - "More accurate and faster than PINN baselines, with efficiency comparable to implicit numerical solvers."
   - period: 2022 – 2023
     title: Data Science Intern
     org: Jules-Gonin Eye Hospital
     logo: /img/logos/jules-gonin.svg
     place: Lausanne, Switzerland
+    kind: research
     details:
-      - "Deep learning models for predicting eye disease progression; computer vision on 3D OCT images."
+      - "Deep learning on 3D OCT scans (U-Nets) to extract retinal biomarkers from 5,211 scans; identified nine predictors of CSCR recurrence (first-author paper, Scientific Reports 2024)."
+      - "Contributed to Cohort Builder, a pipeline assembling patient cohorts from medical records and imaging data (MIE 2024)."
   - period: 2021 – 2022
     title: Research Assistant
     org: EPFL
     logo: /img/logos/epfl.svg
     place: Lausanne, Switzerland
+    kind: research
+    short: "Earlier projects: reinforcement learning (actor–critic) with a T5 transformer (NLP Lab); deep learning prediction of nuclear fusion disruptions (Swiss Plasma Center)."
     details:
       - "NLP Lab: reinforcement-learning actor-critic training with a T5 transformer."
       - "CVLab & Swiss Plasma Center: deep learning predictions of nuclear fusion disruptions."
+  - period: 2025
+    title: Data Engineer
+    org: Liom
+    logo: /img/logos/liom.svg
+    place: Zürich, Switzerland
+    kind: industry
+    details:
+      - "Built a cloud-based data platform at a startup developing non-invasive glucose monitoring."
 
 teaching:
   - period: 2019 – 2023
     title: Teaching Assistant
     org: EPFL
     logo: /img/logos/epfl.svg
+    short: "Mathematical analysis, computer science, probability & statistics, physics."
     details:
       - "Mathematical Analysis, Computer Science, Probability and Statistics, Mechanical Physics."
 
-# TODO: review and update the skills.
+# Students supervised during the PhD. Section hidden while empty. Example:
+#   - period: Spring 2026
+#     title: Master thesis
+#     org: "Student name (optional)"
+#     details: ["Topic of the project."]
+mentoring: []   # TODO: add supervised students
+
+# TODO: review the skills.
 skills:
   - group: Research
-    items: [3D generative models, Flow matching, Diffusion models, Latent-space optimization, Shape optimization, Physics-informed ML, Computer vision]
-  - group: Machine learning
-    items: [PyTorch, PyTorch3D, Transformers, Reinforcement learning, Transfer learning, HPC / multi-GPU training]
+    items: [3D generative models, Flow matching & diffusion, Latent-space optimization, Shape representation, 3D computer vision, Physics-informed ML]
+  - group: ML frameworks
+    items: [PyTorch, PyTorch3D, Hugging Face Transformers, NumPy, multi-GPU / HPC training]
   - group: Programming
-    items: [Python, C / C++, R, Git, LaTeX]
-  - group: Data & MLOps
+    items: [Python, C / C++, R, Git, Linux]
+  - group: Data & cloud
     items: [Pandas, Polars, GCP, AWS, Dagster, Prefect, GitHub Actions]
   - group: Languages
     items: [French (native), English (fluent, C1)]

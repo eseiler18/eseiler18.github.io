@@ -16,7 +16,7 @@ npm run preview
 | Name, bio, links, research interests | `src/data/profile.yaml` |
 | News (home page) | `src/data/news.yaml` |
 | CV page (education, awards, experience, skills) | `src/data/cv.yaml` |
-| PDF CV | put it in `public/cv/` and set `links.cv` in `profile.yaml` (empty = "coming soon" placeholder) |
+| PDF CVs (1-page resume + full CV) | generated from `cv.yaml` by `cv/resume.typ` / `cv/full.typ` (see below) |
 | Publications (**generated**, do not edit) | `src/data/publications.json` |
 | Manual corrections on publications | `src/data/publications.overrides.yaml` |
 | Co-author homepages | `src/data/coauthors.yaml` |
@@ -61,6 +61,20 @@ python3 -m venv .venv && .venv/bin/pip install -r scripts/requirements.txt
 ### Adding a paper by hand (before it is indexed)
 
 Add an entry with `manual: true` in `publications.overrides.yaml`, giving at least `title`, `authors`, `year` and `venue`.
+
+## PDF CVs
+
+The two PDFs are generated from the same data as the `/cv` page (`src/data/cv.yaml` + publications), with [Typst](https://typst.app):
+
+| File | Content |
+|---|---|
+| `cv/resume.typ` → `Emilien_Seiler_Resume.pdf` | 1 page for applications: featured papers, entries with `resume: false` left out, `short:` texts |
+| `cv/full.typ` → `Emilien_Seiler_CV.pdf` | everything, all publications |
+| `cv/template.typ` | shared layout (fonts in `cv/fonts/`) |
+
+- `npm run build` (also run by the deploy workflow) builds the site and then the two PDFs into `dist/cv/`. They are published with the site, **without a phone number**.
+- `npm run cv:private` builds versions **with your phone number** into `cv/out/`, for applications. The number comes from `cv/private.yaml` (`phone: "+41 ..."`). That file is git-ignored and never published.
+- Requires Typst locally: `brew install typst`.
 
 ## Deploying
 

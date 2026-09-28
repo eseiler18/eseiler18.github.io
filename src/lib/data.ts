@@ -23,12 +23,25 @@ export interface Profile {
   links: Record<'email' | 'scholar' | 'github' | 'linkedin' | 'orcid' | 'cv', string>;
 }
 export interface NewsItem { date: string; text: string }
-export interface CvEntry { period: string; title: string; org?: string; place?: string; logo?: string; details?: string[] }
+export interface CvEntry {
+  period: string;
+  title: string;
+  org?: string;
+  place?: string;
+  logo?: string;
+  details?: string[];
+  /** false: left out of the 1-page resume PDF. */
+  resume?: boolean;
+  /** One-line version for the 1-page resume PDF. */
+  short?: string;
+  kind?: 'research' | 'industry';
+}
 export interface Cv {
   education: CvEntry[];
   awards: CvEntry[];
   experience: CvEntry[];
   teaching: CvEntry[];
+  mentoring?: CvEntry[];
   skills: { group: string; items: string[] }[];
 }
 
