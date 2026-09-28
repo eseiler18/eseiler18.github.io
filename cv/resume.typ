@@ -18,7 +18,7 @@
 
 #section("Publications")
 #for p in data.publications.filter(p => p.featured) { publication(p, max: 5) }
-#note[Full list: #link(data.site + "/publications", data.site.replace("https://", "") + "/publications")]
+#note[#link(data.site + "/publications", text(fill: accent)[See all publications →])]
 
 #section("Experience")
 #entries(newest-first(keep(data.cv.experience)), short: true)
