@@ -54,7 +54,7 @@ experience:
     logo: /img/logos/liom.svg
     place: Zürich, Switzerland
     details:
-      - "Architected and deployed an end-to-end cloud data platform automating data pipelines for non-invasive glucose monitoring R&D."
+      - "Co-architected and deployed an end-to-end cloud data platform automating data pipelines for non-invasive glucose monitoring R&D."
   - period: 2022 – 2023
     title: Data Science Intern
     org: Jules-Gonin Eye Hospital
