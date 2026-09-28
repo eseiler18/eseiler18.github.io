@@ -16,7 +16,7 @@ npm run preview
 | Name, bio, links, research interests | `src/data/profile.yaml` |
 | News (home page) | `src/data/news.yaml` |
 | CV page (education, awards, experience, skills) | `src/data/cv.yaml` |
-| PDF CVs (1-page resume + full CV) | generated from `cv.yaml` by `cv/resume.typ` / `cv/full.typ` (see below) |
+| PDF CV (1 page) | generated from `cv.yaml` by `cv/resume.typ` (see below) |
 | Publications (**generated**, do not edit) | `src/data/publications.json` |
 | Manual corrections on publications | `src/data/publications.overrides.yaml` |
 | Co-author homepages | `src/data/coauthors.yaml` |
@@ -62,18 +62,12 @@ python3 -m venv .venv && .venv/bin/pip install -r scripts/requirements.txt
 
 Add an entry with `manual: true` in `publications.overrides.yaml`, giving at least `title`, `authors`, `year` and `venue`.
 
-## PDF CVs
+## PDF CV
 
-The two PDFs are generated from the same data as the `/cv` page (`src/data/cv.yaml` + publications), with [Typst](https://typst.app):
+The 1-page PDF CV is generated from the same data as the `/cv` page (`src/data/cv.yaml` + publications), with [Typst](https://typst.app). The layout lives in `cv/resume.typ` + `cv/template.typ`, and the fonts in `cv/fonts/`. In `cv.yaml`, `resume: false` leaves an entry out of the PDF and `short:` gives a one-line version.
 
-| File | Content |
-|---|---|
-| `cv/resume.typ` → `Emilien_Seiler_Resume.pdf` | 1 page for applications: featured papers, entries with `resume: false` left out, `short:` texts |
-| `cv/full.typ` → `Emilien_Seiler_CV.pdf` | everything, all publications |
-| `cv/template.typ` | shared layout (fonts in `cv/fonts/`) |
-
-- `npm run build` (also run by the deploy workflow) builds the site and then the two PDFs into `dist/cv/`. They are published with the site, **without a phone number**.
-- `npm run cv:private` builds versions **with your phone number** into `cv/out/`, for applications. The number comes from `cv/private.yaml` (`phone: "+41 ..."`). That file is git-ignored and never published.
+- `npm run build` (also run by the deploy workflow) builds the site and then `dist/cv/Emilien_Seiler_CV.pdf`. It is published **without a phone number**.
+- `npm run cv:private` builds a version **with your phone number** into `cv/out/`, for applications. The number comes from `cv/private.yaml` (`phone: "+41 ..."`). That file is git-ignored and never published.
 - Requires Typst locally: `brew install typst`.
 
 ## Deploying

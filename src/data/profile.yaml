@@ -54,4 +54,4 @@ links:
   github: https://github.com/eseiler18
   linkedin: https://www.linkedin.com/in/emilien-seiler/
   orcid: ""                                                 # optional
-  cv: /cv/Emilien_Seiler_Resume.pdf   # generated from cv.yaml (cv/*.typ); empty -> "coming soon" placeholder
+  cv: /cv/Emilien_Seiler_CV.pdf   # generated from cv.yaml (cv/resume.typ); empty -> "coming soon" placeholder

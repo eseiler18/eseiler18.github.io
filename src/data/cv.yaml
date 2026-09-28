@@ -1,10 +1,10 @@
-# Source of the CV: the HTML page (/cv) AND the two PDFs (cv/resume.typ, cv/full.typ).
+# Source of the CV: the HTML page (/cv) AND the 1-page PDF (cv/resume.typ).
 # Publications are pulled automatically from publications.json, so they are not listed here.
 # Newest first everywhere.
 #
 # Optional fields per entry:
-#   resume: false   -> not in the 1-page resume (still in the full CV and on the site)
-#   short: "..."    -> one-line version used in the 1-page resume instead of `details`
+#   resume: false   -> not in the PDF (still on the site)
+#   short: "..."    -> one-line version used in the PDF instead of `details`
 #   Markdown: **bold**, *italic*, [links](/projects/...) (clickable on the site and in the PDFs)
 
 # Short summary shown at the top of the PDF CVs (not on the website).

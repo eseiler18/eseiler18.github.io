@@ -1,4 +1,4 @@
-// 1-page resume for research internship applications.
+// 1-page CV for research internship applications (the only PDF CV).
 // Build: npm run cv   (reads dist/cv/data.json produced by the website build)
 #import "template.typ": *
 

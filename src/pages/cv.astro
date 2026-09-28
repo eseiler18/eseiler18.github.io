@@ -21,10 +21,7 @@ const sections = (
     </div>
     {
       isSet(profile.links.cv) ? (
-        <div class="downloads">
-          <a class="pill solid" href={profile.links.cv} download>Resume (1 page)</a>
-          <a class="pill" href="/cv/Emilien_Seiler_CV.pdf" download>Full CV</a>
-        </div>
+        <a class="pill solid" href={profile.links.cv} download>Download CV (PDF)</a>
       ) : (
         <span class="pill placeholder" title="An updated PDF version is on its way">PDF version coming soon</span>
       )
@@ -81,7 +78,6 @@ const sections = (
   .cv-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
   h1 { font-size: 2.1rem; margin: 0 0 0.3rem; }
   .cv-head p { margin: 0; }
-  .downloads { display: flex; gap: 0.5rem; flex-wrap: wrap; }
   .placeholder { cursor: default; color: var(--text-faint); border-style: dashed; }
   .placeholder:hover { color: var(--text-faint); border-color: var(--line); }
   h2 { border-bottom: 1px solid var(--line); padding-bottom: 0.4rem; }

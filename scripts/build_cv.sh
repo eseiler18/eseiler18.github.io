@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Compile the two PDF CVs from dist/cv/data.json (produced by `astro build`).
+# Compile the PDF CV (cv/resume.typ) from dist/cv/data.json (produced by `astro build`).
 #
 #   bash scripts/build_cv.sh            # public versions -> dist/cv/ (published with the site)
 #   bash scripts/build_cv.sh --private  # + phone from cv/private.yaml -> cv/out/ (never published)
@@ -21,7 +21,7 @@ if [ "${1:-}" = "--private" ]; then
 fi
 mkdir -p "$out"
 
-for pair in resume:Emilien_Seiler_Resume full:Emilien_Seiler_CV; do
+for pair in resume:Emilien_Seiler_CV; do
   src=${pair%%:*}
   name=${pair##*:}
   typst compile --root . --font-path cv/fonts --ignore-system-fonts \
