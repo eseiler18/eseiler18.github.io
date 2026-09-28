@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import AuthorList from '../components/AuthorList.astro';
-import { profile, cv, getPublications, isSet, type CvEntry } from '../lib/data';
+import { profile, cv, getPublications, isSet, venueLine, type CvEntry } from '../lib/data';
 
 const pubs = await getPublications();
 const sections: [string, CvEntry[]][] = [
@@ -62,7 +62,7 @@ const sections: [string, CvEntry[]][] = [
             <br />
             <span class="muted"><AuthorList authors={p.authors} linked={false} max={8} /></span>
             <br />
-            <em class="muted">{p.venue}{!/\d{4}/.test(p.venue) && `, ${p.year}`}</em>
+            <em class="muted">{venueLine(p)}</em>
           </li>
         ))
       }

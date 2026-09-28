@@ -95,6 +95,13 @@ function bibtexFor(p: Publication): string {
   return `@${kind}{${key},\n${fields.map(([k, v]) => `  ${k.padEnd(width)} = {${v}}`).join(',\n')}\n}`;
 }
 
+const isPreprint = (p: Publication) =>
+  p.type === 'preprint' || /arxiv|preprint|research square|biorxiv|medrxiv/i.test(p.venue);
+
+/** "NeurIPS 2026", "Scientific Reports, 2024", or just "2025" for preprints. */
+export const venueLine = (p: Publication) =>
+  !p.venue ? String(p.year) : /\d{4}/.test(p.venue) ? p.venue : `${p.venue}, ${p.year}`;
+
 let cache: Publication[] | undefined;
 
 /** Publications from the sync, merged with manual overrides, newest first. */
@@ -164,6 +171,12 @@ export async function getPublications(): Promise<Publication[]> {
         hasPage,
       };
       pub.bibtex = (o.bibtex as string | undefined)?.trim() ?? bibtexFor(pub);
+      // Preprints: no "arXiv preprint" label on the site (the arXiv button is enough).
+      // The BibTeX above still cites them properly.
+      if (isPreprint(pub)) {
+        pub.venue = '';
+        pub.venueShort = '';
+      }
       return pub;
     })
     .filter((p): p is Publication => p !== null)
