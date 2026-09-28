@@ -64,11 +64,16 @@
   align(center + horizon, image("icons/" + name + ".svg", height: 100%)),
 ))
 
+// The website's "ES" logo (same as the favicon), linking to the website.
+#let site-logo(url) = link(url, box(
+  width: 17pt, height: 17pt, radius: 4pt, fill: accent,
+  align(center + horizon, text(font: serif, size: 7.6pt, weight: 600, fill: white, "ES")),
+))
+
 #let header(data, phone: none) = {
   let p = data.profile
   let l = p.links
   let icons = (
-    ("website", data.site),
     ("github", l.at("github", default: "")),
     ("scholar", l.at("scholar", default: "")),
     ("linkedin", l.at("linkedin", default: "")),
@@ -87,7 +92,8 @@
       #link("mailto:" + l.email, l.email)
       #if phone != none and phone != "" [ \ #phone]
       #v(-0.25em)
-      #icons.map(((name, url)) => icon-link(url, name)).join(h(0.3em))
+      #let row-items = (site-logo(data.site), ..icons.map(((name, url)) => icon-link(url, name)))
+      #box(grid(columns: row-items.len(), column-gutter: 0.3em, align: horizon, ..row-items))
     ],
   )
   v(0.45em)
