@@ -26,6 +26,8 @@
   t = t.replace(regex("\*\*(.+?)\*\*"), m => "BOLD{" + m.captures.at(0) + "}BOLD")
   t = t.replace(regex("\*(.+?)\*"), m => "\_" + m.captures.at(0) + "\_")
   t = t.replace("\\_", "_").replace("BOLD{", "*").replace("}BOLD", "*")
+  // Non-breaking hyphen (U+2011, e.g. "non‑invasive"): keep the word on one line, normal hyphen glyph.
+  t = t.replace(regex("(\\w+)\u{2011}(\\w+)"), m => "#box[" + m.captures.at(0) + "\\-" + m.captures.at(1) + "]")
   eval(t, mode: "markup")
 }
 
