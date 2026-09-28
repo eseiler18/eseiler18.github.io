@@ -1,9 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
-import AuthorList from '../components/AuthorList.astro';
-import { profile, cv, getPublications, isSet, venueLine, md, type CvEntry } from '../lib/data';
+import { profile, cv, isSet, md, type CvEntry } from '../lib/data';
 
-const pubs = await getPublications();
 const sections = (
   [
     ['Education', cv.education],
@@ -61,20 +59,7 @@ const sections = (
 
   <section>
     <h2>Publications</h2>
-    <ol class="pubs">
-      {
-        pubs.map((p) => (
-          <li>
-            <a href={p.href} class:list={{ ext: p.external }} target={p.external ? '_blank' : undefined} rel="noopener">{p.title}</a>
-            <br />
-            <span class="muted"><AuthorList authors={p.authors} linked={false} max={8} /></span>
-            <br />
-            <em class="muted">{venueLine(p)}</em>
-          </li>
-        ))
-      }
-    </ol>
-    <p class="full-list">Full list: <a href="/publications">publications page</a></p>
+    <p class="full-list">See the <a href="/publications">full list of publications →</a></p>
   </section>
 
   <section>
@@ -108,11 +93,7 @@ const sections = (
   .logo img { max-width: 36px; max-height: 36px; object-fit: contain; }
   .period { color: var(--text-faint); font-size: 0.9rem; font-variant-numeric: tabular-nums; padding-top: 0.1rem; }
   .entry ul { margin: 0.25rem 0 0; padding-left: 1.1rem; color: var(--text-soft); font-size: 0.95rem; }
-  .pubs { padding-left: 1.3rem; margin: 0; }
-  .pubs li { margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.5; }
-  .pubs a { color: var(--text); font-weight: 500; }
-  .pubs a:hover { color: var(--accent); }
-  .full-list { font-size: 0.9rem; color: var(--text-faint); margin: 0.2rem 0 0; }
+  .full-list { margin: 0; color: var(--text-soft); }
   .skills { display: grid; grid-template-columns: 170px 1fr; gap: 0.5rem 1.2rem; margin: 0; }
   .skills dt { font-weight: 600; font-size: 0.95rem; }
   .skills dd { margin: 0; color: var(--text-soft); font-size: 0.95rem; }
