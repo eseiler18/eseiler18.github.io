@@ -14,9 +14,8 @@ bio:
     I am a PhD student at [EPFL](https://www.epfl.ch) in the
     [Computer Vision Laboratory](https://www.epfl.ch/labs/cvlab/), advised by
     [Prof. Pascal Fua](https://people.epfl.ch/pascal.fua), and supported by an
-    EDIC Fellowship. My research focuses on optimizing 3D shapes within the latent
-    spaces of large generative models, keeping them valid while
-    pushing them towards engineering objectives such as aerodynamic drag or stiffness.
+    EDIC Fellowship. My research lies in 3D computer vision, with a focus on shape
+    representation, 3D generative models and shape optimization.
   - >-
     Before my PhD, I obtained an M.Sc. in Computational Science and Engineering from EPFL,
     and wrote my Master's thesis at [Harvard University](https://iacs.seas.harvard.edu/)
@@ -25,11 +24,26 @@ bio:
     on deep learning for ophthalmology at the Jules-Gonin Eye Hospital and as a data engineer
     at Liom.
 
+# "For students" box on the home page (Markdown links allowed; [email] = mailto link).
+students:
+  items:
+    - >-
+      Students interested in a **semester project or master thesis**, please consult our
+      [lab's project page](https://www.epfl.ch/labs/cvlab/projects/) or contact me directly by [email].
+    - >-
+      **Master/Bachelor summer interns**, please apply to the [Summer@EPFL](https://summer.epfl.ch/) program.
+    - >-
+      **PhD applicants**, please refer to the
+      [doctoral program page](https://www.epfl.ch/education/phd/edic-computer-and-communication-sciences/).
+  note: >-
+    Feel free to contact me! Please make it clear you have had a look at these resources and
+    avoid sending a generic email.
+
 interests:
+  - 3D computer vision
+  - Shape representation
   - 3D generative models
   - Shape optimization
-  - Flow matching & diffusion
-  - Scientific machine learning
 
 # Every name under which papers are published, used to highlight the name
 # and to detect first-authored papers (they get their own page).

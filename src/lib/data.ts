@@ -18,6 +18,7 @@ export interface Profile {
   photo?: string;
   bio: string[];
   interests: string[];
+  students?: { items: string[]; note?: string };
   name_variants: string[];
   links: Record<'email' | 'scholar' | 'github' | 'linkedin' | 'orcid' | 'cv', string>;
 }

@@ -57,6 +57,19 @@ const shownLinks = links.filter((l) => isSet(l.href) && l.href !== 'mailto:');
     </p>
   </section>
 
+  {
+    profile.students && (
+      <section class="students">
+        <ul>
+          {profile.students.items.map((t) => (
+            <li set:html={md(t).replace('[email]', `<a href="mailto:${profile.links.email}">email</a>`)} />
+          ))}
+        </ul>
+        {profile.students.note && <p set:html={md(profile.students.note)} />}
+      </section>
+    )
+  }
+
   <section>
     <h2>News</h2>
     <ul class="news">
@@ -111,6 +124,15 @@ const shownLinks = links.filter((l) => isSet(l.href) && l.href !== 'mailto:');
   .interests { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem; margin-top: 1.4rem; font-size: 0.9rem; }
   .interests .faint { margin-right: 0.3rem; }
   .tag { padding: 0.15em 0.65em; border-radius: 6px; background: var(--bg-soft); color: var(--text-soft); font-size: 0.85rem; }
+  .students {
+    margin-top: 2rem; padding: 1.1rem 1.3rem; border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: 0 var(--radius) var(--radius) 0;
+    background: var(--bg-soft); font-size: 0.93rem;
+  }
+  .students ul { list-style: none; margin: 0 0 0.6rem; padding: 0; }
+  .students li { position: relative; padding-left: 1.5rem; margin-bottom: 0.35rem; }
+  .students li::before { content: '⟶'; position: absolute; left: 0; color: var(--accent); }
+  .students p { margin: 0; color: var(--text-soft); }
   .news { list-style: none; padding: 0; margin: 0; }
   .news li { display: grid; grid-template-columns: 90px 1fr; gap: 1rem; padding: 0.45rem 0; font-size: 0.97rem; }
   .date { color: var(--text-faint); font-variant-numeric: tabular-nums; font-size: 0.9rem; padding-top: 0.08rem; }
