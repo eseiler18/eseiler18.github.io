@@ -54,16 +54,16 @@ experience:
     logo: /img/logos/liom.svg
     place: Zürich, Switzerland
     details:
-      - "Built a cloud-based data platform at a startup developing non-invasive glucose monitoring."
+      - "Designed and built the cloud data platform of a startup developing non-invasive glucose monitoring, supporting its data collection and analysis pipelines."
   - period: 2022 – 2023
     title: Data Science Intern
     org: Jules-Gonin Eye Hospital
     logo: /img/logos/jules-gonin.svg
     place: Lausanne, Switzerland
-    short: "Deep learning on 5,211 3D OCT scans to extract retinal biomarkers; identified nine predictors of disease recurrence (first-author paper, [Scientific Reports 2024](/projects/cscr-oct-biomarkers))."
+    short: "Built deep learning models to extract retinal biomarkers from 5,211 3D OCT scans and identified nine predictors of disease recurrence; first author of the resulting [Scientific Reports 2024](/projects/cscr-oct-biomarkers) paper."
     details:
-      - "Deep learning on 3D OCT scans (U-Nets) to extract retinal biomarkers from 5,211 scans; identified nine predictors of CSCR recurrence (first-author paper, [Scientific Reports 2024](/projects/cscr-oct-biomarkers))."
-      - "Contributed to Cohort Builder, a pipeline assembling patient cohorts from medical records and imaging data (MIE 2024)."
+      - "Built deep learning models (U-Nets) to extract retinal biomarkers from 5,211 3D OCT scans, and identified nine predictors of CSCR recurrence; first author of the resulting [Scientific Reports 2024](/projects/cscr-oct-biomarkers) paper."
+      - "Co-developed [Cohort Builder](https://doi.org/10.3233/shti240613), a software pipeline that assembles patient cohorts from medical records and ophthalmic imaging data (MIE 2024)."
   - period: 2021 – 2022
     title: Research Assistant
     org: EPFL
@@ -75,6 +75,12 @@ experience:
       - "CVLab & Swiss Plasma Center: deep learning predictions of nuclear fusion disruptions."
 
 teaching:
+  - period: 2025 – present
+    title: Research Project Supervisor
+    org: EPFL
+    logo: /img/logos/epfl.svg
+    details:
+      - "Supervised several students on research semester projects at the Computer Vision Laboratory."
   - period: 2019 – 2023
     title: Teaching Assistant
     org: EPFL

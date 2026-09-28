@@ -24,7 +24,7 @@
 // Awards / mentoring / teaching appear only if some entries are not `resume: false`.
 #let others = keep(data.cv.at("awards", default: ())) + keep(data.cv.at("mentoring", default: ())) + keep(data.cv.at("teaching", default: ()))
 #if others.len() > 0 {
-  section("Awards, Mentoring & Teaching")
+  section(if keep(data.cv.at("awards", default: ())).len() > 0 { "Awards & Teaching" } else { "Teaching & Supervision" })
   entries(others, short: true)
 }
 
