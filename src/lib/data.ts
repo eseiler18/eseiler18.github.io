@@ -36,8 +36,10 @@ export const news = readYaml<NewsItem[]>('news.yaml');
 export const cv = readYaml<Cv>('cv.yaml');
 export const coauthors = readYaml<Record<string, string>>('coauthors.yaml') ?? {};
 
-/** A link is unset while it is empty or still contains a TODO placeholder. */
-export const isSet = (url?: string) => !!url && !url.includes('TODO');
+/** A link is usable when set, not a TODO placeholder, and uses a safe scheme
+ * (URLs partly come from external sources: never allow javascript: or data: links). */
+export const isSet = (url?: string) =>
+  !!url && !url.includes('TODO') && /^(https?:\/\/|mailto:|\/(?!\/)|#)/i.test(url.trim());
 
 // ---------------------------------------------------------------- publications
 export interface Publication {
@@ -179,6 +181,7 @@ const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 export function md(s: string): string {
   return esc(s)
     .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (_, t, u) => {
+      if (!isSet(u)) return t;
       const ext = /^https?:/.test(u);
       return `<a href="${u}"${ext ? ' target="_blank" rel="noopener"' : ''}>${t}</a>`;
     })

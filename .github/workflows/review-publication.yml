@@ -6,6 +6,11 @@ on:
   issue_comment:
     types: [created]
 
+# One decision at a time, so two quick replies cannot race on git push.
+concurrency:
+  group: publications
+  cancel-in-progress: false
+
 permissions:
   contents: write
   issues: write
@@ -23,11 +28,11 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       COMMENT: ${{ github.event.comment.body }}
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-python@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: '3.12'
-      - run: pip install pyyaml
+      - run: pip install pyyaml==6.0.3
       - name: Apply decision
         run: |
           result=$(python scripts/review.py decide "${{ github.event.issue.number }}" "$COMMENT")
