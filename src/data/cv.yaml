@@ -94,7 +94,7 @@ mentoring: []   # TODO: add supervised students
 
 skills:
   - group: Research
-    items: [3D generative models, Flow matching & diffusion, Latent-space optimization, "Shape representation (SDF, meshes, point clouds)", Differentiable rendering, Neural fields & Gaussian Splatting, Physics-informed ML]
+    items: [3D generative models, Flow matching & diffusion, Latent-space optimization, "Shape representation (SDF, meshes, point clouds)", Differentiable rendering, Physics-informed ML]
   - group: ML & Training
     items: [PyTorch, Hugging Face, Multi-GPU training (DDP), SLURM / HPC clusters]
   - group: 3D
