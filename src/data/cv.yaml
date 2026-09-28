@@ -23,10 +23,11 @@ education:
       - "First author of [Flow-Corrected Shape Optimization (NeurIPS 2026)](/projects/fcso), a state-of-the-art framework for shape optimization in high-dimensional 3D generative models that leverages flow matching."
   - period: 2023 – 2024
     title: Master's Thesis
-    org: Harvard University, IACS (Prof. Pavlos Protopapas)
+    org: Harvard University, IACS
     logo: /img/logos/harvard.png
     place: Boston, USA
     details:
+      - "Advisor: Prof. Pavlos Protopapas."
       - "Developed a transfer-learning method that lets physics-informed neural networks solve stiff equations, published as [Stiff Transfer Learning for Physics-Informed Neural Networks](/projects/stiff-transfer-pinns). Grade 5.75/6."
   - period: 2021 – 2024
     title: M.Sc. in Computational Science and Engineering
