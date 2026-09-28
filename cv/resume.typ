@@ -16,7 +16,7 @@
 #section("Education")
 #entries(keep(data.cv.education), short: true)
 
-#section("Publications")
+#section("Selected Publications")
 #for p in data.publications.filter(p => p.featured) { publication(p, max: 5) }
 #note[#link(data.site + "/publications", text(fill: accent)[See all publications →])]
 
