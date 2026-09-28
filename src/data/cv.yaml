@@ -54,7 +54,7 @@ experience:
     logo: /img/logos/liom.svg
     place: Zürich, Switzerland
     details:
-      - "Architected and deployed an end-to-end cloud data platform automating ingestion and processing pipelines for non-invasive glucose monitoring R&D."
+      - "Architected and deployed an end-to-end cloud data platform automating data pipelines for non-invasive glucose monitoring R&D."
   - period: 2022 – 2023
     title: Data Science Intern
     org: Jules-Gonin Eye Hospital
@@ -69,10 +69,10 @@ experience:
     org: EPFL
     logo: /img/logos/epfl.svg
     place: Lausanne, Switzerland
-    short: "NLP Lab: trained T5 transformers via actor-critic reinforcement learning. CVLab & SPC: built deep learning models to predict nuclear fusion disruptions."
+    short: "NLP Lab: trained T5 transformers via actor-critic reinforcement learning. CVLab & SPC: predicted nuclear fusion disruptions with deep learning."
     details:
       - "NLP Lab: Trained T5 transformers via actor-critic reinforcement learning."
-      - "CVLab & SPC: Built deep learning models to predict nuclear fusion disruptions."
+      - "CVLab & SPC: Predicted nuclear fusion disruptions with deep learning."
 
 teaching:
   - period: 2025 – present
