@@ -54,15 +54,15 @@ experience:
     logo: /img/logos/liom.svg
     place: Zürich, Switzerland
     details:
-      - "Designed and built a cloud data platform supporting the data collection and analysis pipelines for the development of non-invasive glucose monitoring."
+      - "Architected and deployed an end-to-end cloud data platform automating ingestion and processing pipelines for non-invasive glucose monitoring R&D."
   - period: 2022 – 2023
     title: Data Science Intern
     org: Jules-Gonin Eye Hospital
     logo: /img/logos/jules-gonin.svg
     place: Lausanne, Switzerland
-    short: "Used deep learning to identify nine predictors of CSCR recurrence from OCT scans; first author of the resulting [Scientific Reports 2024](/projects/cscr-oct-biomarkers) paper."
+    short: "Engineered deep learning models on high-resolution OCT scans to discover 9 clinical biomarkers of CSCR recurrence; published as first author in [Scientific Reports (2024)](/projects/cscr-oct-biomarkers)."
     details:
-      - "Used deep learning to identify nine predictors of CSCR recurrence from OCT scans; first author of the resulting [Scientific Reports 2024](/projects/cscr-oct-biomarkers) paper."
+      - "Engineered deep learning models on high-resolution OCT scans to discover 9 clinical biomarkers of CSCR recurrence; published as first author in [Scientific Reports (2024)](/projects/cscr-oct-biomarkers)."
       - "Co-developed Cohort Builder, a software pipeline that assembles patient cohorts from medical records and ophthalmic imaging data ([MIE 2024](https://doi.org/10.3233/shti240613))."
   - period: 2021 – 2022
     title: Research Assistant
