@@ -69,10 +69,10 @@ experience:
     org: EPFL
     logo: /img/logos/epfl.svg
     place: Lausanne, Switzerland
-    short: "Reinforcement learning (actor–critic) with a T5 transformer (NLP Lab); deep learning prediction of nuclear fusion disruptions (Swiss Plasma Center)."
+    short: "NLP Lab: trained T5 transformers via actor-critic reinforcement learning. CVLab & SPC: built deep learning models to predict nuclear fusion disruptions."
     details:
-      - "NLP Lab: reinforcement-learning actor-critic training with a T5 transformer."
-      - "CVLab & Swiss Plasma Center: deep learning predictions of nuclear fusion disruptions."
+      - "NLP Lab: Trained T5 transformers via actor-critic reinforcement learning."
+      - "CVLab & SPC: Built deep learning models to predict nuclear fusion disruptions."
 
 teaching:
   - period: 2025 – present
