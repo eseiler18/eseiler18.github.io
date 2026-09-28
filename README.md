@@ -16,7 +16,7 @@ npm run preview
 | Name, bio, links, research interests | `src/data/profile.yaml` |
 | News (home page) | `src/data/news.yaml` |
 | CV page (education, awards, experience, skills) | `src/data/cv.yaml` |
-| PDF CV | `public/cv/Emilien_Seiler_CV.pdf` |
+| PDF CV | put it in `public/cv/` and set `links.cv` in `profile.yaml` (empty = "coming soon" placeholder) |
 | Publications (**generated**, do not edit) | `src/data/publications.json` |
 | Manual corrections on publications | `src/data/publications.overrides.yaml` |
 | Co-author homepages | `src/data/coauthors.yaml` |
