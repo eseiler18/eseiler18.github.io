@@ -28,21 +28,17 @@ education:
     place: Boston, USA
     details:
       - "Advisor: Prof. Pavlos Protopapas."
-      - "Developed a transfer-learning method that lets physics-informed neural networks solve stiff equations, published as [Stiff Transfer Learning for Physics-Informed Neural Networks](/projects/stiff-transfer-pinns). Grade 5.75/6."
+      - "Developed a transfer-learning method that lets physics-informed neural networks solve stiff equations, published as [Stiff Transfer Learning for Physics-Informed Neural Networks](/projects/stiff-transfer-pinns)."
   - period: 2021 – 2024
     title: M.Sc. in Computational Science and Engineering
     org: EPFL
     logo: /img/logos/epfl.svg
     place: Lausanne, Switzerland
-    details:
-      - "GPA 5.42/6."
   - period: 2018 – 2021
     title: B.Sc. in Environmental Sciences and Engineering
     org: EPFL
     logo: /img/logos/epfl.svg
     place: Lausanne, Switzerland
-    details:
-      - "GPA 5.2/6."
 
 # The EDIC Fellowship is mentioned in the PhD entry. Section hidden while empty.
 awards: []
