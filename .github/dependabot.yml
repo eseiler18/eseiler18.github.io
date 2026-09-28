@@ -7,6 +7,9 @@ updates:
   - package-ecosystem: pip
     directory: /scripts
     schedule: { interval: weekly }
+    ignore:
+      - dependency-name: bibtexparser   # scholarly needs bibtexparser 1.x
+        update-types: [version-update:semver-major]
   - package-ecosystem: npm
     directory: /
     schedule: { interval: weekly }

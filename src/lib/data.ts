@@ -15,7 +15,7 @@ export interface Profile {
   advisor: string;
   advisor_url: string;
   location: string;
-  photo: string;
+  photo?: string;
   bio: string[];
   interests: string[];
   name_variants: string[];
