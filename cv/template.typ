@@ -132,7 +132,7 @@
     )
     #set par(spacing: 0.24em)
     #if short and s != none {
-      if s != "" { text(size: 9.2pt, fill: soft, md(s)) }
+      if s != "" { set text(size: 9.2pt); list(md(s)) }
     } else if details.len() > 0 {
       set text(size: 9.2pt)
       list(..details.map(md))
