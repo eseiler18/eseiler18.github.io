@@ -3,3 +3,4 @@ PyYAML==6.0.3
 scholarly==1.7.11
 bibtexparser==1.4.4   # scholarly breaks with bibtexparser 2.x
 pymupdf==1.28.2       # extracts Figure 1 of new papers as their illustration
+pillow==12.3.0         # flattens transparent images before rendering figures

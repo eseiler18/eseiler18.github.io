@@ -252,6 +252,31 @@ def find_links(text: str) -> dict:
     return links
 
 
+def flatten_transparency(doc, page) -> None:
+    """Composite transparent images (soft masks) onto white before rendering. Otherwise
+    the renderer blends their edges with the black RGB hidden under the mask, which
+    draws thin grey frames around the sub-figures."""
+    import io
+    from PIL import Image
+
+    for img in page.get_images(full=True):
+        xref, smask = img[0], img[1]
+        if not smask:
+            continue
+        try:
+            import pymupdf
+            rgb = Image.open(io.BytesIO(pymupdf.Pixmap(doc, xref).tobytes("png"))).convert("RGB")
+            alpha = Image.open(io.BytesIO(pymupdf.Pixmap(doc, smask).tobytes("png"))).convert("L")
+            if alpha.size != rgb.size:
+                alpha = alpha.resize(rgb.size)
+            flat = Image.composite(rgb, Image.new("RGB", rgb.size, "white"), alpha)
+            buf = io.BytesIO()
+            flat.save(buf, "PNG")
+            page.replace_image(xref, stream=buf.getvalue())
+        except Exception as exc:  # keep the original image
+            print(f"    (could not flatten image {xref}: {exc})", file=sys.stderr)
+
+
 def extract_figure(pdf: bytes, out: Path) -> bool:
     """Render 'Figure 1' of a paper (graphics above its caption) to a JPEG thumbnail."""
     try:
@@ -284,6 +309,7 @@ def extract_figure(pdf: bytes, out: Path) -> bool:
                 clip |= r
         clip.y1 = min(clip.y1, cap[1] - 6)  # never include the caption itself
         clip = pymupdf.Rect(clip.x0 - 4, clip.y0 - 4, clip.x1 + 4, clip.y1 + 2) & page.rect
+        flatten_transparency(doc, page)
         out.parent.mkdir(parents=True, exist_ok=True)
         pix = page.get_pixmap(dpi=180, clip=clip)
         pix.save(str(out), jpg_quality=85)
