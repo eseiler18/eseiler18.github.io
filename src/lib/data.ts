@@ -73,6 +73,9 @@ const squash = (s: string) => s.toLowerCase().normalize('NFD').replace(/[^a-z]/g
 const myNames = new Set(profile.name_variants.map(squash));
 export const isMe = (name: string) => myNames.has(squash(name));
 
+const isPreprint = (p: Publication) =>
+  p.type === 'preprint' || /arxiv|preprint|research square|biorxiv|medrxiv/i.test(p.venue);
+
 function bibtexFor(p: Publication): string {
   const last = (p.authors[0] ?? 'anon').split(' ').pop()!.toLowerCase().normalize('NFD').replace(/[^a-z]/g, '');
   const key = `${last}${p.year}${p.title.split(/\W+/)[0].toLowerCase()}`;
@@ -82,21 +85,20 @@ function bibtexFor(p: Publication): string {
       return parts.length > 1 ? `${parts.pop()}, ${parts.join(' ')}` : a;
     })
     .join(' and ');
-  const preprint = p.type === 'preprint';
-  const kind = preprint || /journal|reports|nature|science|studies/i.test(p.venue) ? 'article' : 'inproceedings';
+  // Preprints: plain @misc with a URL, without "arXiv preprint" wording.
+  const preprint = isPreprint(p);
+  const kind = preprint ? 'misc' : /journal|reports|nature|science|studies/i.test(p.venue) ? 'article' : 'inproceedings';
   const fields: [string, string][] = [
     ['title', p.title],
     ['author', authors],
-    [kind === 'article' ? 'journal' : 'booktitle', preprint && p.arxiv ? `arXiv preprint arXiv:${p.arxiv}` : p.venue],
+    ...(preprint ? [] : [[kind === 'article' ? 'journal' : 'booktitle', p.venue] as [string, string]]),
     ['year', String(p.year)],
   ];
   if (p.doi) fields.push(['doi', p.doi]);
+  else if (preprint && p.arxiv) fields.push(['url', `https://arxiv.org/abs/${p.arxiv}`]);
   const width = Math.max(...fields.map(([k]) => k.length));
   return `@${kind}{${key},\n${fields.map(([k, v]) => `  ${k.padEnd(width)} = {${v}}`).join(',\n')}\n}`;
 }
-
-const isPreprint = (p: Publication) =>
-  p.type === 'preprint' || /arxiv|preprint|research square|biorxiv|medrxiv/i.test(p.venue);
 
 /** "NeurIPS 2026", "Scientific Reports, 2024", or just "2025" for preprints. */
 export const venueLine = (p: Publication) =>
@@ -154,8 +156,8 @@ export async function getPublications(): Promise<Publication[]> {
         thumbnail: p.thumbnail,
         equalContribution: p.equal_contribution ?? [],
         links: {
-          ...(arxivUrl && { arXiv: arxivUrl }),
-          ...(doiUrl && { Paper: doiUrl }),
+          // A single neutral "Paper" button: the published version (DOI) if any, else arXiv.
+          ...((doiUrl || arxivUrl) && { Paper: doiUrl || arxivUrl }),
           ...(isSet(p.project_url) && { Project: p.project_url }),
           ...(isSet(s.code) && { Code: s.code }),
           ...Object.fromEntries(
