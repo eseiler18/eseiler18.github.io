@@ -1,0 +1,22 @@
+# Settings for scripts/sync_scholar.py (run weekly by .github/workflows/sync-publications.yml).
+
+# From https://scholar.google.com/citations?user=XXXXXXXXXXXX -> put XXXXXXXXXXXX here.
+# Leave empty to skip Google Scholar and use OpenAlex only.
+scholar_id: 2ZyukIMAAAAJ
+
+# OpenAlex (free, reliable API). Used as a fallback / complement to Scholar.
+openalex_author_id: A5109898783
+orcid: ""                 # optional, e.g. 0000-0000-0000-0000
+
+# OpenAlex merges an unrelated 1990s "E. Seiler" into the same profile:
+# anything older than this year is ignored.
+min_year: 2020
+
+# Case-insensitive substrings; matching titles are never imported.
+exclude_titles: []
+
+# Public URL of the site (used in the notification emails).
+site_url: https://eseiler18.github.io
+
+# GitHub account notified (by email) for each new paper. Reply "non" to hide the paper.
+notify_github_user: eseiler18

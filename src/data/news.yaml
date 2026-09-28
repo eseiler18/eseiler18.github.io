@@ -1,0 +1,9 @@
+# Newest first. `text` accepts Markdown links.
+- date: Sep 2026
+  text: "Our paper [Flow-Corrected Shape Optimization](/projects/fcso) is accepted at **NeurIPS 2026**! Check out the [explainer video](/projects/fcso#video)."
+- date: Sep 2025
+  text: "Started my PhD at the [EPFL Computer Vision Lab](https://www.epfl.ch/labs/cvlab/) with Prof. Pascal Fua, supported by an **EDIC Fellowship**."
+- date: Jan 2025
+  text: "Preprint [Stiff Transfer Learning for Physics-Informed Neural Networks](/projects/stiff-transfer-pinns) is on arXiv."
+- date: Oct 2024
+  text: "Our work on [OCT biomarkers for CSCR recurrence](/projects/cscr-oct-biomarkers) is published in **Scientific Reports**."

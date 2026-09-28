@@ -1,0 +1,168 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import AuthorList from '../../components/AuthorList.astro';
+import Bibtex from '../../components/Bibtex.astro';
+import { getPublicationById, getPublications } from '../../lib/data';
+
+export async function getStaticPaths() {
+  const pubs = await getPublications();
+  const entries = await getCollection('projects', ({ data }) => import.meta.env.DEV || !data.draft);
+  return entries.flatMap((entry) => {
+    // Unknown or hidden publication (e.g. rejected by email): no page.
+    const pub = pubs.find((p) => p.id === entry.data.pub);
+    return pub?.slug === entry.id ? [{ params: { slug: entry.id }, props: { entry } }] : [];
+  });
+}
+
+const { entry } = Astro.props;
+const pub = (await getPublicationById(entry.data.pub))!;
+const { Content } = await render(entry);
+const { tldr, teaser, video, comparisons, figures, draft } = entry.data;
+
+const buttons = [
+  ...Object.entries(pub.links).filter(([label, url]) => label !== 'Video' && !url.startsWith('/')),
+  ...(video ? [['Video', '#video']] : []),
+  ['BibTeX', '#bibtex'],
+] as [string, string][];
+---
+
+<Base title={pub.title} description={tldr ?? pub.abstract.slice(0, 180)} image={pub.thumbnail} wide>
+  <article class="project">
+    {draft && <p class="draft">Draft: this page is not published (remove <code>draft: true</code> to publish).</p>}
+
+    <header class="head">
+      {pub.venue && <p class="venue"><span class="badge">{pub.venue}</span></p>}
+      <h1>{pub.title}</h1>
+      <p class="authors"><AuthorList authors={pub.authors} equal={pub.equalContribution} /></p>
+      {pub.equalContribution.length > 0 && <p class="faint small">* Equal contribution</p>}
+      <ul class="pill-links buttons">
+        {
+          buttons.map(([label, url]) => (
+            <li>
+              <a class="pill" href={url} target={url.startsWith('#') ? undefined : '_blank'} rel="noopener">{label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </header>
+
+    {
+      teaser && (
+        <figure class="teaser">
+          <img src={teaser.src} alt={teaser.caption ?? pub.title} />
+          {teaser.caption && <figcaption>{teaser.caption}</figcaption>}
+        </figure>
+      )
+    }
+
+    <div class="prose">
+      {tldr && <p class="tldr"><strong>TL;DR</strong> {tldr}</p>}
+    </div>
+
+    {
+      video && (
+        <section id="video" class="video-block">
+          <h2>Video</h2>
+          <video controls preload="metadata" playsinline poster={video.poster}>
+            <source src={video.src} type="video/mp4" />
+            Your browser cannot play this video. <a href={video.src}>Download it</a>.
+          </video>
+          {video.caption && <p class="caption">{video.caption}</p>}
+        </section>
+      )
+    }
+
+    <div class="prose">
+
+      {
+        pub.abstract && (
+          <section>
+            <h2>Abstract</h2>
+            <p>{pub.abstract}</p>
+          </section>
+        )
+      }
+    </div>
+
+    {
+      comparisons && (
+        <section class="compare">
+          <h2>{comparisons.title ?? 'Results'}</h2>
+          {comparisons.caption && <p class="prose-width muted">{comparisons.caption}</p>}
+          <div class="compare-grid">
+            <div class="col-label" />
+            <div class="col-label">{comparisons.labels[0]}</div>
+            <div class="col-label ours">{comparisons.labels[1]}</div>
+            {comparisons.rows.map((r) => (
+              <>
+                <div class="row-label">{r.name}</div>
+                <img src={r.left} alt={`${r.name}: ${comparisons.labels[0]}`} loading="lazy" />
+                <img src={r.right} alt={`${r.name}: ${comparisons.labels[1]}`} loading="lazy" />
+              </>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    {
+      figures.map((f) => (
+        <figure class:list={['figure', { wide: f.wide }]}>
+          <img src={f.src} alt={f.caption ?? ''} loading="lazy" />
+          {f.caption && <figcaption>{f.caption}</figcaption>}
+        </figure>
+      ))
+    }
+
+    <section id="bibtex" class="prose">
+      <h2>Citation</h2>
+      <Bibtex id={`page-${pub.id}`} bibtex={pub.bibtex} />
+    </section>
+  </article>
+</Base>
+
+<style>
+  .project { --prose: 760px; }
+  .prose, .prose-width { max-width: var(--prose); margin-left: auto; margin-right: auto; }
+  .draft { background: #fff3cd; color: #664d03; padding: 0.6rem 1rem; border-radius: 8px; font-size: 0.9rem; }
+
+  .head { text-align: center; max-width: 900px; margin: 0.5rem auto 2.2rem; }
+  .venue { margin: 0 0 0.9rem; }
+  .venue .badge { font-size: 0.85rem; padding: 0.2em 0.8em; }
+  h1 { font-size: clamp(1.7rem, 4vw, 2.5rem); margin: 0 0 1rem; line-height: 1.2; }
+  .authors { font-size: 1.05rem; color: var(--text-soft); margin: 0 0 0.4rem; }
+  .small { font-size: 0.85rem; }
+  .buttons { justify-content: center; margin-top: 1.3rem; }
+
+  .teaser, .figure { margin: 0 auto 2rem; max-width: 960px; }
+  .figure { max-width: var(--prose); }
+  .figure.wide { max-width: 960px; }
+  .teaser img, .figure img { width: 100%; border-radius: var(--radius); background: #fff; }
+  figcaption, .caption { font-size: 0.88rem; color: var(--text-soft); margin-top: 0.7rem; text-align: center; }
+
+  .tldr { font-size: 1.1rem; padding: 1rem 1.2rem; border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: 0 8px 8px 0; }
+  .tldr strong { color: var(--accent); margin-right: 0.3rem; }
+
+  .video-block { max-width: 960px; margin: 0 auto; }
+  .video-block h2, .compare h2 { max-width: var(--prose); margin-left: auto; margin-right: auto; }
+  video { width: 100%; border-radius: var(--radius); background: #000; box-shadow: var(--shadow); aspect-ratio: 16 / 9; }
+
+  .compare { max-width: 960px; margin: 0 auto; }
+  .compare-grid { display: grid; grid-template-columns: auto 1fr 1fr; gap: 0.8rem 1rem; align-items: center; }
+  .compare-grid img { width: 100%; max-height: 300px; object-fit: contain; background: #fff; border-radius: 8px; border: 1px solid var(--line); }
+  .col-label { text-align: center; font-weight: 600; font-size: 0.95rem; color: var(--text-soft); }
+  .col-label.ours { color: var(--accent); }
+  .row-label { writing-mode: vertical-rl; transform: rotate(180deg); text-align: center; font-size: 0.85rem; color: var(--text-faint); }
+
+  #bibtex { margin-top: 1rem; }
+
+  @media (max-width: 620px) {
+    .compare-grid { gap: 0.5rem; }
+    .compare-grid img { max-height: 200px; }
+  }
+</style>

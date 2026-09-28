@@ -1,0 +1,101 @@
+---
+import Base from '../layouts/Base.astro';
+import AuthorList from '../components/AuthorList.astro';
+import { profile, cv, getPublications, type CvEntry } from '../lib/data';
+
+const pubs = await getPublications();
+const sections: [string, CvEntry[]][] = [
+  ['Education', cv.education],
+  ['Fellowships & Awards', cv.awards],
+  ['Experience', cv.experience],
+  ['Teaching', cv.teaching],
+];
+---
+
+<Base title="CV" description={`Curriculum vitae of ${profile.name}.`}>
+  <header class="cv-head">
+    <div>
+      <h1>Curriculum Vitae</h1>
+      <p class="muted">{profile.name} · {profile.role}, {profile.affiliation}</p>
+    </div>
+    <a class="pill solid" href={profile.links.cv} download>Download PDF</a>
+  </header>
+
+  {
+    sections.map(([title, entries]) => (
+      <section>
+        <h2>{title}</h2>
+        {entries.map((e) => (
+          <div class="entry">
+            <div class="period">{e.period}</div>
+            <div>
+              <div class="what">
+                <strong>{e.title}</strong>
+                {e.org && <span>, {e.org}</span>}
+                {e.place && <span class="faint"> · {e.place}</span>}
+              </div>
+              {e.details && (
+                <ul>
+                  {e.details.map((d) => <li>{d}</li>)}
+                </ul>
+              )}
+            </div>
+          </div>
+        ))}
+      </section>
+    ))
+  }
+
+  <section>
+    <h2>Publications</h2>
+    <ol class="pubs">
+      {
+        pubs.map((p) => (
+          <li>
+            <a href={p.href} class:list={{ ext: p.external }} target={p.external ? '_blank' : undefined} rel="noopener">{p.title}</a>
+            <br />
+            <span class="muted"><AuthorList authors={p.authors} linked={false} max={8} /></span>
+            <br />
+            <em class="muted">{p.venue}{!/\d{4}/.test(p.venue) && `, ${p.year}`}</em>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section>
+    <h2>Skills</h2>
+    <dl class="skills">
+      {
+        cv.skills.map((s) => (
+          <>
+            <dt>{s.group}</dt>
+            <dd>{s.items.join(' · ')}</dd>
+          </>
+        ))
+      }
+    </dl>
+  </section>
+</Base>
+
+<style>
+  .cv-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  h1 { font-size: 2.1rem; margin: 0 0 0.3rem; }
+  .cv-head p { margin: 0; }
+  h2 { border-bottom: 1px solid var(--line); padding-bottom: 0.4rem; }
+  .entry { display: grid; grid-template-columns: 130px 1fr; gap: 1.2rem; padding: 0.55rem 0; }
+  .period { color: var(--text-faint); font-size: 0.9rem; font-variant-numeric: tabular-nums; padding-top: 0.1rem; }
+  .entry ul { margin: 0.25rem 0 0; padding-left: 1.1rem; color: var(--text-soft); font-size: 0.95rem; }
+  .pubs { padding-left: 1.3rem; margin: 0; }
+  .pubs li { margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.5; }
+  .pubs a { color: var(--text); font-weight: 500; }
+  .pubs a:hover { color: var(--accent); }
+  .skills { display: grid; grid-template-columns: 170px 1fr; gap: 0.5rem 1.2rem; margin: 0; }
+  .skills dt { font-weight: 600; font-size: 0.95rem; }
+  .skills dd { margin: 0; color: var(--text-soft); font-size: 0.95rem; }
+
+  @media (max-width: 620px) {
+    .entry, .skills { grid-template-columns: 1fr; gap: 0.1rem; }
+    .skills dd { margin-bottom: 0.6rem; }
+  }
+</style>

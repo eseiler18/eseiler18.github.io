@@ -1,0 +1,118 @@
+---
+import '../styles/global.css';
+import { profile } from '../lib/data';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  wide?: boolean;
+}
+const { title, description, image, wide = false } = Astro.props;
+const pageTitle = title ? `${title} | ${profile.name}` : `${profile.name} | ${profile.role}, EPFL`;
+const desc =
+  description ?? `${profile.name}: ${profile.role} at ${profile.affiliation}. Research, publications and CV.`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image ?? profile.photo, Astro.site);
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const nav = [
+  { href: '/', label: 'About' },
+  { href: '/publications', label: 'Publications' },
+  { href: '/cv', label: 'CV' },
+];
+const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={desc} />
+    <meta name="author" content={profile.name} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap"
+    />
+    <script is:inline>
+      try {
+        const t = localStorage.getItem('theme');
+        if (t) document.documentElement.dataset.theme = t;
+      } catch {}
+    </script>
+    <slot name="head" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="/">{profile.name}</a>
+        <nav class="nav" aria-label="Main">
+          {nav.map((n) => <a href={n.href} aria-current={isCurrent(n.href) ? 'page' : undefined}>{n.label}</a>)}
+        </nav>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
+          <svg class="sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+          <svg class="moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <div class:list={['container', { wide }]}>
+        <slot />
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <span>© {new Date().getFullYear()} {profile.name}</span>
+        <span>{profile.affiliation} · {profile.location}</span>
+      </div>
+    </footer>
+
+    <script>
+      const root = document.documentElement;
+      document.querySelector('.theme-toggle')?.addEventListener('click', () => {
+        const dark =
+          root.dataset.theme === 'dark' ||
+          (!root.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches);
+        root.dataset.theme = dark ? 'light' : 'dark';
+        try {
+          localStorage.setItem('theme', root.dataset.theme);
+        } catch {}
+      });
+
+      // Abstract / BibTeX toggles on publication cards.
+      document.querySelectorAll<HTMLButtonElement>('[data-toggle]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const panel = document.getElementById(btn.dataset.toggle!);
+          if (!panel) return;
+          panel.hidden = !panel.hidden;
+          btn.setAttribute('aria-expanded', String(!panel.hidden));
+        });
+      });
+
+      // "Copy" buttons for BibTeX blocks.
+      document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          const target = document.getElementById(btn.dataset.copy!);
+          if (!target) return;
+          await navigator.clipboard.writeText(target.textContent ?? '');
+          const label = btn.textContent;
+          btn.textContent = 'Copied!';
+          setTimeout(() => (btn.textContent = label), 1500);
+        });
+      });
+    </script>
+  </body>
+</html>

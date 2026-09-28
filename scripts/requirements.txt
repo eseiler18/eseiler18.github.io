@@ -1,0 +1,4 @@
+pyyaml>=6
+scholarly>=1.7
+bibtexparser<2  # scholarly breaks with bibtexparser 2.x
+pymupdf>=1.24  # extracts Figure 1 of new papers as their illustration

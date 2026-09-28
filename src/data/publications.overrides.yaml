@@ -1,0 +1,57 @@
+# Manual corrections on top of the auto-generated publications.json.
+# Keys are the `id` of each entry in publications.json.
+#
+# Available fields (all optional):
+#   slug:        URL of the internal page (/projects/<slug>); defaults to the id
+#   page:        true/false: force an internal page on or off. By default, only
+#                papers where I am first author get an internal page.
+#   project_url: external page (e.g. the first author's project site); for
+#                papers without an internal page it is what the title links to
+#   venue:       display venue, e.g. "NeurIPS 2026"
+#   venue_short: short badge, e.g. "NeurIPS"
+#   featured:    true -> shown on the home page
+#   hidden:      true -> not shown anywhere
+#   equal_contribution: [names], marked with *
+#   thumbnail:   image path under public/
+#   links:       { code: ..., video: ..., pdf: ..., slides: ..., poster: ... }
+#   bibtex:      full BibTeX string (otherwise generated automatically)
+#   title / authors / year: overwrite what the sync found
+#
+# To add a paper that is not indexed yet, create an entry with `manual: true`
+# and at least title, authors, year, venue.
+
+publications:
+  flow-corrected-shape-optimization-taming-manifold:
+    slug: fcso
+    venue: NeurIPS 2026
+    venue_short: NeurIPS
+    type: paper
+    featured: true
+    thumbnail: /projects/fcso/teaser.jpg
+    links:
+      video: /projects/fcso#video
+      code: ""          # TODO: code repository
+    bibtex: |
+      @inproceedings{seiler2026fcso,
+        title     = {Flow-Corrected Shape Optimization: Taming Manifold Drift in High-Dimensional 3D Models},
+        author    = {Seiler, Emilien and Talabot, Nicolas and You, Yingxuan and Stella, Federico and Fua, Pascal},
+        booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
+        year      = {2026}
+      }
+
+  stiff-transfer-learning-for-physics-informed:
+    slug: stiff-transfer-pinns
+    venue_short: arXiv
+    featured: true
+    thumbnail: /projects/stiff-transfer-pinns/teaser.jpg
+
+  importance-of-oct-derived-biomarkers-for:
+    slug: cscr-oct-biomarkers
+    venue_short: Sci. Rep.
+    featured: true
+    thumbnail: /projects/cscr-oct-biomarkers/teaser.jpg
+
+  cohort-builder-a-software-pipeline-for:
+    venue: Medical Informatics Europe (MIE) 2024
+    venue_short: MIE
+    thumbnail: /projects/cohort-builder/teaser.jpg

@@ -1,0 +1,14 @@
+---
+interface Props { id: string; bibtex: string }
+const { id, bibtex } = Astro.props;
+---
+
+<div class="bib">
+  <pre class="bibtex" id={`bib-${id}`}>{bibtex}</pre>
+  <button class="pill copy" type="button" data-copy={`bib-${id}`}>Copy</button>
+</div>
+
+<style>
+  .bib { position: relative; }
+  .copy { position: absolute; top: 8px; right: 8px; font-size: 0.75rem; padding: 0.15em 0.7em; }
+</style>

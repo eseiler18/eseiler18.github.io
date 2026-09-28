@@ -1,0 +1,23 @@
+---
+// Brand and UI icons from Font Awesome Free (CC BY 4.0, https://fontawesome.com/license/free).
+import { faGithub, faGoogleScholar, faLinkedinIn, faOrcid } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope, faFileLines } from '@fortawesome/free-solid-svg-icons';
+
+const icons = {
+  email: faEnvelope,
+  scholar: faGoogleScholar,
+  github: faGithub,
+  linkedin: faLinkedinIn,
+  orcid: faOrcid,
+  cv: faFileLines,
+};
+export type IconName = keyof typeof icons;
+
+interface Props { name: IconName; size?: number }
+const { name, size = 18 } = Astro.props;
+const [w, h, , , path] = icons[name].icon;
+---
+
+<svg width={size} height={size} viewBox={`0 0 ${w} ${h}`} fill="currentColor" aria-hidden="true">
+  <path d={Array.isArray(path) ? path.join(' ') : path} />
+</svg>

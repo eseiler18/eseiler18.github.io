@@ -1,0 +1,19 @@
+{
+  "name": "emilienseiler-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "sync": "python3 scripts/sync_scholar.py"
+  },
+  "dependencies": {
+    "astro": "^7.3.5",
+    "js-yaml": "^5.4.2"
+  },
+  "devDependencies": {
+    "@fortawesome/free-brands-svg-icons": "^7.3.1",
+    "@fortawesome/free-solid-svg-icons": "^7.3.1"
+  }
+}
