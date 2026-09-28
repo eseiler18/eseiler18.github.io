@@ -1,5 +1,6 @@
 ---
 pub: stiff-transfer-learning-for-physics-informed
+context: "This work comes from my Master's thesis at Harvard University with Prof. Pavlos Protopapas."
 tldr: "Vanilla PINNs fail on stiff differential equations. STL-PINNs train a multi-head PINN in a mildly stiff regime, then transfer to highly stiff regimes in one shot, without retraining."
 teaser:
   src: /projects/stiff-transfer-pinns/teaser.jpg
@@ -9,5 +10,3 @@ figures:
     wide: true
     caption: "Results on stiff ODEs (OHO, NCFF, Duffing) and on the AR PDE: solutions learned in the training regime (top) and transferred to much stiffer regimes (bottom) match the Radau reference solver."
 ---
-
-This work comes from my Master's thesis at Harvard University with Prof. Pavlos Protopapas.

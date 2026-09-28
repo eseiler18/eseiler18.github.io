@@ -18,7 +18,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const pub = (await getPublicationById(entry.data.pub))!;
 const { Content } = await render(entry);
-const { tldr, teaser, video, comparisons, figures, draft } = entry.data;
+const { tldr, context, teaser, video, comparisons, figures, draft } = entry.data;
 
 const buttons = [
   ...Object.entries(pub.links).filter(([label, url]) => label !== 'Video' && !url.startsWith('/')),
@@ -78,6 +78,7 @@ const buttons = [
       {
         pub.abstract && (
           <section>
+            {context && <p class="context">{context}</p>}
             <h2>Abstract</h2>
             <p>{pub.abstract}</p>
           </section>
@@ -145,6 +146,7 @@ const buttons = [
   .teaser img, .figure img { width: 100%; border-radius: var(--radius); background: #fff; }
   figcaption, .caption { font-size: 0.88rem; color: var(--text-soft); margin-top: 0.7rem; text-align: center; }
 
+  .context { margin: 2rem 0 -0.5rem; color: var(--text-soft); font-style: italic; }
   .tldr { font-size: 1.1rem; padding: 1rem 1.2rem; border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: 0 8px 8px 0; }
   .tldr strong { color: var(--accent); margin-right: 0.3rem; }
 

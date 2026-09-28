@@ -14,6 +14,8 @@ const projects = defineCollection({
     draft: z.boolean().default(false),
     auto: z.boolean().optional(), // created by the sync script
     tldr: z.string().optional(),
+    // One line shown before the abstract (e.g. where / in which context the work was done).
+    context: z.string().optional(),
     teaser: figure.optional(),
     video: z
       .object({ src: z.string(), poster: z.string().optional(), caption: z.string().optional() })
