@@ -30,13 +30,22 @@ const shownLinks = links.filter((l) => isSet(l.href) && l.href !== 'mailto:');
         {
           shownLinks.map((l) => (
             <li>
-              <a class="social" href={l.href} title={l.label} aria-label={l.label} target={l.href.startsWith('http') ? '_blank' : undefined} rel="noopener">
+              <a
+                class="social"
+                href={l.href}
+                title={l.icon === 'email' ? profile.links.email : l.label}
+                aria-label={l.label}
+                target={l.href.startsWith('http') ? '_blank' : undefined}
+                rel="noopener"
+                data-copy-email={l.icon === 'email' ? profile.links.email : undefined}
+              >
                 <Icon name={l.icon} />
               </a>
             </li>
           ))
         }
       </ul>
+      <p class="copied" role="status" aria-live="polite" hidden>Email copied: {profile.links.email}</p>
     </div>
   </section>
 
@@ -68,6 +77,21 @@ const shownLinks = links.filter((l) => isSet(l.href) && l.href !== 'mailto:');
   </section>
 </Base>
 
+<script>
+  // mailto: does nothing without a configured mail app: also copy the address.
+  const link = document.querySelector<HTMLAnchorElement>('[data-copy-email]');
+  const note = document.querySelector<HTMLElement>('.copied');
+  link?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(link.dataset.copyEmail!);
+      if (note) {
+        note.hidden = false;
+        setTimeout(() => (note.hidden = true), 3000);
+      }
+    } catch {}
+  });
+</script>
+
 <style>
   .hero { display: grid; grid-template-columns: 180px 1fr; gap: 2.2rem; align-items: center; }
   .hero.no-photo { grid-template-columns: 1fr; }
@@ -81,6 +105,7 @@ const shownLinks = links.filter((l) => isSet(l.href) && l.href !== 'mailto:');
     color: var(--text-soft); border: 1px solid var(--line); transition: color 0.15s, border-color 0.15s, transform 0.15s;
   }
   .social:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-1px); }
+  .copied { margin: 0.6rem 0 0; font-size: 0.85rem; color: var(--accent); }
   .bio { margin-top: 2.4rem; }
   .bio :global(p) { font-size: 1.02rem; }
   .interests { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem; margin-top: 1.4rem; font-size: 0.9rem; }
