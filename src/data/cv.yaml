@@ -46,6 +46,7 @@ awards:
     title: EDIC Fellowship
     org: EPFL Doctoral School in Computer and Communication Sciences
     logo: /img/logos/epfl.svg
+    resume: false   # already mentioned in the PhD entry of the resume
     details:
       - "One-year fellowship for incoming PhD students, allowing them to explore research labs before choosing a thesis director."
 
@@ -66,6 +67,7 @@ experience:
     logo: /img/logos/harvard.png
     place: Boston, USA
     kind: research
+    short: "Stiff Transfer Learning for PINNs: a multi-head PINN trained in low-stiffness regimes and transferred in one shot to highly stiff ODEs/PDEs, faster and more accurate than PINN baselines."
     details:
       - "Proposed Stiff Transfer Learning for PINNs: a multi-head PINN trained in low-stiffness regimes, transferred in one shot to highly stiff ODEs and PDEs."
       - "More accurate and faster than PINN baselines, with efficiency comparable to implicit numerical solvers."
@@ -75,6 +77,7 @@ experience:
     logo: /img/logos/jules-gonin.svg
     place: Lausanne, Switzerland
     kind: research
+    short: "Deep learning on 5,211 3D OCT scans to extract retinal biomarkers; identified nine predictors of disease recurrence (first-author paper, Scientific Reports 2024)."
     details:
       - "Deep learning on 3D OCT scans (U-Nets) to extract retinal biomarkers from 5,211 scans; identified nine predictors of CSCR recurrence (first-author paper, Scientific Reports 2024)."
       - "Contributed to Cohort Builder, a pipeline assembling patient cohorts from medical records and imaging data (MIE 2024)."
@@ -102,6 +105,7 @@ teaching:
     title: Teaching Assistant
     org: EPFL
     logo: /img/logos/epfl.svg
+    resume: false
     short: "Mathematical analysis, computer science, probability & statistics, physics."
     details:
       - "Mathematical Analysis, Computer Science, Probability and Statistics, Mechanical Physics."

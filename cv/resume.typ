@@ -14,20 +14,19 @@
 #entries(keep(data.cv.education), short: true)
 
 #section("Publications")
-#for p in data.publications.filter(p => p.featured) { publication(p) }
+#for p in data.publications.filter(p => p.featured) { publication(p, max: 5) }
 #note[Full list: #link(data.site + "/publications", data.site.replace("https://", "") + "/publications")]
 
-#section("Research Experience")
-#entries(keep(research(data)), short: true)
+#section("Experience")
+#entries(newest-first(keep(research(data)) + keep(industry(data))), short: true)
 
-#section("Industry Experience")
-#entries(keep(industry(data)), short: true)
-
-#let mentoring = keep(data.cv.at("mentoring", default: ()))
-#section(if mentoring.len() > 0 { "Awards, Mentoring & Teaching" } else { "Awards & Teaching" })
-#entries(keep(data.cv.awards), short: true)
-#entries(mentoring, short: true)
-#entries(keep(data.cv.teaching), short: true)
+// Awards and teaching are left out of the 1-page resume with `resume: false`
+// in cv.yaml (the EDIC Fellowship is already in the PhD entry); mentoring shows when filled.
+#let others = keep(data.cv.awards) + keep(data.cv.at("mentoring", default: ())) + keep(data.cv.teaching)
+#if others.len() > 0 {
+  section(if keep(data.cv.at("mentoring", default: ())).len() > 0 { "Mentoring & Teaching" } else { "Awards & Teaching" })
+  entries(others, short: true)
+}
 
 #section("Skills")
 #skills(data.cv.skills)

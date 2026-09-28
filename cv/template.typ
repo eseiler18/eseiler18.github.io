@@ -31,16 +31,16 @@
 
 #let setup(body) = {
   set document(author: "Emilien Seiler")
-  set page(paper: "a4", margin: (left: 1.7cm, right: 1.7cm, top: 1.5cm, bottom: 1.3cm))
-  set text(font: sans, size: 9.8pt, fill: ink, lang: "en", number-type: "lining")
-  set par(justify: false, leading: 0.56em, spacing: 0.62em)
-  set list(indent: 0pt, body-indent: 0.55em, spacing: 0.38em, marker: text(fill: accent, size: 0.8em, baseline: -0.05em, "▸"))
+  set page(paper: "a4", margin: (left: 1.8cm, right: 1.8cm, top: 1.6cm, bottom: 1.4cm))
+  set text(font: sans, size: 10pt, fill: ink, lang: "en", number-type: "lining")
+  set par(justify: false, leading: 0.68em, spacing: 0.75em)
+  set list(indent: 0pt, body-indent: 0.55em, spacing: 0.55em, marker: text(fill: accent, size: 0.8em, baseline: -0.05em, "▸"))
   show link: set text(fill: ink)
   body
 }
 
 // Two-column row: `left` in the narrow column, `body` on the right.
-#let row(left, body, below: 0.7em) = block(below: below, breakable: false, grid(
+#let row(left, body, below: 1.05em) = block(below: below, breakable: false, grid(
   columns: (side, 1fr),
   column-gutter: gap,
   align(right, left),
@@ -68,15 +68,15 @@
     ],
     text(size: 8.8pt, fill: soft, contact.join(linebreak())),
   )
-  v(0.2em)
+  v(0.45em)
   line(length: 100%, stroke: 1.4pt + accent)
-  v(0.15em)
+  v(0.2em)
 }
 
 // Section title across the page, followed by a hairline.
 #let section(title) = {
-  v(0.55em)
-  block(below: 0.65em, sticky: true, grid(  // sticky: never alone at the bottom of a page
+  v(1.1em)
+  block(below: 0.85em, sticky: true, grid(  // sticky: never alone at the bottom of a page
     columns: (auto, 1fr),
     column-gutter: 0.6em,
     align: horizon,
@@ -96,7 +96,7 @@
   let s = e.at("short", default: none)
   let details = e.at("details", default: ())
   row(when(e.period))[
-    #set block(spacing: 0.38em)
+    #set block(spacing: 0.55em)
     #grid(
       columns: (1fr, auto),
       column-gutter: 0.8em,
@@ -115,15 +115,22 @@
 
 #let entries(list, short: false) = for e in list { entry(e, short: short) }
 
-#let publication(p) = {
-  let authors = p.authors.map(a => {
+// `max`: shorten long author lists to the first authors + me + "et al."
+#let publication(p, max: none) = {
+  let list = p.authors
+  if max != none and list.len() > max {
+    let mine = list.position(a => a.me)
+    list = if mine == none or mine < max { list.slice(0, max) } else { list.slice(0, max - 1) + (list.at(mine),) }
+    list.push((name: "et al.", me: false, equal: false))
+  }
+  let authors = list.map(a => {
     let n = if a.equal { a.name + "*" } else { a.name }
     if a.me { text(weight: 700, fill: ink, n) } else { n }
   })
   // The year sits in the left column; the venue line is skipped when it is only the year.
   let venue = if p.venue != str(p.year) { p.venue }
-  row(when(p.year), below: 0.72em)[
-    #set par(spacing: 0.3em, leading: 0.45em)
+  row(when(p.year), below: 0.95em)[
+    #set par(spacing: 0.4em, leading: 0.55em)
     #link(p.url, text(weight: 600, p.title)) \
     #text(size: 9pt, fill: soft)[#authors.join(", ")]
     #if venue != none [\ #text(size: 9pt, style: "italic", weight: 600, fill: accent, venue)]
@@ -131,11 +138,18 @@
 }
 
 #let skills(list) = for s in list {
-  row(text(size: 9pt, weight: 700, fill: soft, s.group), below: 0.5em, text(size: 9.2pt, s.items.join("  ·  ")))
+  row(text(size: 9pt, weight: 700, fill: soft, s.group), below: 0.6em, text(size: 9.2pt, s.items.join("  ·  ")))
 }
 
 // A single plain line aligned with the content column (e.g. a link or a note).
 #let note(body) = row([], text(size: 8.8pt, fill: faint, body))
+
+// Newest first by start year; ongoing ("present") entries first within a year.
+#let newest-first(list) = list.sorted(key: e => {
+  let p = str(e.period)
+  let y = p.find(regex("\d{4}"))
+  (if y == none { 0 } else { int(y) }, if p.contains("present") { 1 } else { 0 })
+}).rev()
 
 #let research(data) = data.cv.experience.filter(e => e.at("kind", default: "research") != "industry")
 #let industry(data) = data.cv.experience.filter(e => e.at("kind", default: "research") == "industry")
