@@ -27,7 +27,7 @@ publications:
     venue_short: NeurIPS
     type: paper
     featured: true
-    thumbnail: /projects/fcso/teaser.jpg
+    thumbnail: /projects/fcso/figure1.jpg
     links:
       video: /projects/fcso#video
       code: ""          # TODO: code repository

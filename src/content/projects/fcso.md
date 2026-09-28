@@ -2,7 +2,7 @@
 pub: flow-corrected-shape-optimization-taming-manifold
 tldr: "Gradient-based optimization in the latent space of large 3D generative models drifts off the manifold of valid shapes. FCSO alternates free gradient steps on the objective with a flow-matching correction that brings the latent back onto the manifold: optimize freely, correct strictly."
 teaser:
-  src: /projects/fcso/teaser.jpg
+  src: /projects/fcso/figure1.jpg
   caption: "(a) Manifold drift: gradient descent reduces bike compliance and car drag, but the shapes stop being valid. (b) FCSO reaches the same objective values while the shapes stay valid. (c) FCSO alternates gradient descent (GD) steps and flow-matching (FM) corrections, shown here for volume reduction."
 video:
   src: /projects/fcso/fcso_explainer.mp4
