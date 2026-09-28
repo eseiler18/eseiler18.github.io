@@ -41,6 +41,7 @@ publications:
 
   stiff-transfer-learning-for-physics-informed:
     slug: stiff-transfer-pinns
+    venue: arXiv preprint
     featured: true
     thumbnail: /projects/stiff-transfer-pinns/teaser.jpg
 

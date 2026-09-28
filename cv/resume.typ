@@ -9,6 +9,7 @@
 #show: setup
 #set document(title: "Emilien Seiler — Resume")
 #header(data, phone: phone)
+#summary(data)
 
 #section("Education")
 #entries(keep(data.cv.education), short: true)
@@ -18,13 +19,12 @@
 #note[Full list: #link(data.site + "/publications", data.site.replace("https://", "") + "/publications")]
 
 #section("Experience")
-#entries(newest-first(keep(research(data)) + keep(industry(data))), short: true)
+#entries(newest-first(keep(data.cv.experience)), short: true)
 
-// Awards and teaching are left out of the 1-page resume with `resume: false`
-// in cv.yaml (the EDIC Fellowship is already in the PhD entry); mentoring shows when filled.
-#let others = keep(data.cv.awards) + keep(data.cv.at("mentoring", default: ())) + keep(data.cv.teaching)
+// Awards / mentoring / teaching appear only if some entries are not `resume: false`.
+#let others = keep(data.cv.at("awards", default: ())) + keep(data.cv.at("mentoring", default: ())) + keep(data.cv.at("teaching", default: ()))
 #if others.len() > 0 {
-  section(if keep(data.cv.at("mentoring", default: ())).len() > 0 { "Mentoring & Teaching" } else { "Awards & Teaching" })
+  section("Awards, Mentoring & Teaching")
   entries(others, short: true)
 }
 

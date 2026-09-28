@@ -37,6 +37,8 @@ export interface CvEntry {
   kind?: 'research' | 'industry';
 }
 export interface Cv {
+  /** Summary sentence at the top of the PDF CVs. */
+  summary?: string;
   education: CvEntry[];
   awards: CvEntry[];
   experience: CvEntry[];
@@ -187,9 +189,9 @@ export async function getPublications(): Promise<Publication[]> {
         hasPage,
       };
       pub.bibtex = (o.bibtex as string | undefined)?.trim() ?? bibtexFor(pub);
-      // Preprints: no "arXiv preprint" label on the site (the arXiv button is enough).
+      // Preprints: no "arXiv preprint" label on the site unless the overrides set a `venue`.
       // The BibTeX above still cites them properly.
-      if (isPreprint(pub)) {
+      if (isPreprint(pub) && !o.venue) {
         pub.venue = '';
         pub.venueShort = '';
       }

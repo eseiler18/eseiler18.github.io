@@ -17,8 +17,8 @@
 #let side = 2.35cm   // width of the left column
 #let gap = 0.9em     // gutter between the two columns
 
-// Tiny Markdown subset used in the YAML files: **bold**, *italic*.
-#let md(s) = {
+// Tiny Markdown subset used in the YAML files: **bold**, *italic*, [links](https://...).
+#let md-inline(s) = {
   let t = s
   for c in ("\\", "#", "$", "@", "<", ">", "_", "~", "`", "[", "]", "=", "-", "+", "/") {
     t = t.replace(c, "\\" + c)
@@ -27,6 +27,17 @@
   t = t.replace(regex("\*(.+?)\*"), m => "\_" + m.captures.at(0) + "\_")
   t = t.replace("\\_", "_").replace("BOLD{", "*").replace("}BOLD", "*")
   eval(t, mode: "markup")
+}
+
+#let md(s) = {
+  let out = []
+  let pos = 0
+  for m in s.matches(regex("\\[([^\\]]+)\\]\\(([^)\\s]+)\\)")) {
+    out += md-inline(s.slice(pos, m.start))
+    out += link(m.captures.at(1), text(fill: accent, md-inline(m.captures.at(0))))
+    pos = m.end
+  }
+  out + md-inline(s.slice(pos))
 }
 
 #let setup(body) = {
@@ -151,5 +162,10 @@
   (if y == none { 0 } else { int(y) }, if p.contains("present") { 1 } else { 0 })
 }).rev()
 
-#let research(data) = data.cv.experience.filter(e => e.at("kind", default: "research") != "industry")
-#let industry(data) = data.cv.experience.filter(e => e.at("kind", default: "research") == "industry")
+// Summary paragraph under the header (cv.yaml: summary).
+#let summary(data) = {
+  let s = data.cv.at("summary", default: none)
+  if s != none and s != "" {
+    block(above: 0.9em, below: 0.2em, text(size: 9.8pt, fill: soft, md(s)))
+  }
+}

@@ -17,7 +17,8 @@ export const GET: APIRoute = async ({ site }) => {
       interests: profile.interests,
       links: profile.links,
     },
-    cv,
+    // Markdown links in cv.yaml are relative ("/projects/fcso"): make them absolute for the PDFs.
+    cv: JSON.parse(JSON.stringify(cv).replaceAll('](/', `](${site?.toString().replace(/\/$/, '')}/`)),
     publications: pubs.map((p) => ({
       title: p.title,
       authors: p.authors.map((a) => ({ name: a, me: isMe(a), equal: p.equalContribution.includes(a) })),

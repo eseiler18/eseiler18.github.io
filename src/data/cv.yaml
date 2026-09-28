@@ -5,7 +5,12 @@
 # Optional fields per entry:
 #   resume: false   -> not in the 1-page resume (still in the full CV and on the site)
 #   short: "..."    -> one-line version used in the 1-page resume instead of `details`
-#   kind: research | industry   (experience only; groups entries in the PDFs)
+#   Markdown: **bold**, *italic*, [links](/projects/...) (clickable on the site and in the PDFs)
+
+# Short summary shown at the top of the PDF CVs (not on the website).
+summary: >-
+  PhD student at EPFL (Computer Vision Laboratory) working on 3D generative models, shape representation
+  and shape optimization, with a first-author paper at **NeurIPS 2026**. Seeking a **research internship in 2027**.
 
 education:
   - period: 2025 – present
@@ -14,91 +19,54 @@ education:
     logo: /img/logos/epfl.svg
     place: Lausanne, Switzerland
     details:
-      - "Advisor: Prof. Pascal Fua. EDIC Fellowship."
-      - "Research: 3D computer vision, shape representation, 3D generative models and shape optimization."
-  - period: 2023 – 2024
-    title: Master's Thesis
-    org: Harvard University
-    logo: /img/logos/harvard.png
-    place: Boston, USA
-    resume: false   # merged into the Harvard research entry in the resume
-    details:
-      - "Physics-Informed Neural Networks for Solving Differential Equations in Stiffness Regimes: A Multi-Head Architecture and Transfer Learning Approach. Grade 5.75/6."
+      - "Advisor: Prof. Pascal Fua. Supported by the EDIC Fellowship."
+      - "First-author [NeurIPS 2026](/projects/fcso) paper (FCSO): identified *manifold drift*, the failure of gradient-based optimization in the latent spaces of large 3D generative models."
+      - "Designed an optimizer–corrector method alternating free gradient steps with guided flow-matching corrections, keeping shapes valid without retraining the generative prior."
+      - "Scaled it from vector latent spaces to large 3D models (VecSet, Hunyuan3D) on aerodynamic drag, compliance and volume optimization."
   - period: 2021 – 2024
     title: M.Sc. in Computational Science and Engineering
     org: EPFL
     logo: /img/logos/epfl.svg
     place: Lausanne, Switzerland
-    short: "GPA 5.42/6. Master's thesis at Harvard University (grade 5.75/6)."
     details:
-      - "GPA 5.42/6."
+      - "Master's thesis at Harvard University, IACS (Prof. Pavlos Protopapas), 2023–2024."
+      - "Proposed [Stiff Transfer Learning for PINNs](/projects/stiff-transfer-pinns): a multi-head PINN trained in low-stiffness regimes, transferred in one shot to highly stiff ODEs and PDEs."
+      - "More accurate and faster than PINN baselines, with efficiency comparable to implicit numerical solvers."
   - period: 2018 – 2021
     title: B.Sc. in Environmental Sciences and Engineering
     org: EPFL
     logo: /img/logos/epfl.svg
     place: Lausanne, Switzerland
-    short: ""
-    details:
-      - "GPA 5.2/6."
 
-awards:
-  - period: "2025"
-    title: EDIC Fellowship
-    org: EPFL Doctoral School in Computer and Communication Sciences
-    logo: /img/logos/epfl.svg
-    resume: false   # already mentioned in the PhD entry of the resume
-    details:
-      - "One-year fellowship for incoming PhD students, allowing them to explore research labs before choosing a thesis director."
+# The EDIC Fellowship is mentioned in the PhD entry. Section hidden while empty.
+awards: []
 
 experience:
-  - period: 2025 – present
-    title: PhD Researcher
-    org: EPFL, Computer Vision Laboratory
-    logo: /img/logos/epfl.svg
-    place: Lausanne, Switzerland
-    kind: research
+  - period: 2025
+    title: Data Engineering Intern
+    org: Liom
+    logo: /img/logos/liom.svg
+    place: Zürich, Switzerland
     details:
-      - "First-author NeurIPS 2026 paper (FCSO): identified *manifold drift*, the failure of gradient-based optimization in the latent spaces of large 3D generative models."
-      - "Designed an optimizer–corrector method alternating free gradient steps with guided flow-matching corrections, keeping shapes valid without retraining the generative prior."
-      - "Scaled it from vector latent spaces to large 3D models (VecSet, Hunyuan3D) on aerodynamic drag, compliance and volume optimization."
-  - period: 2023 – 2024
-    title: Research Assistant (Master's thesis)
-    org: Harvard University, IACS (Prof. Pavlos Protopapas)
-    logo: /img/logos/harvard.png
-    place: Boston, USA
-    kind: research
-    short: "Stiff Transfer Learning for PINNs: a multi-head PINN trained in low-stiffness regimes and transferred in one shot to highly stiff ODEs/PDEs, faster and more accurate than PINN baselines."
-    details:
-      - "Proposed Stiff Transfer Learning for PINNs: a multi-head PINN trained in low-stiffness regimes, transferred in one shot to highly stiff ODEs and PDEs."
-      - "More accurate and faster than PINN baselines, with efficiency comparable to implicit numerical solvers."
+      - "Built a cloud-based data platform at a startup developing non-invasive glucose monitoring."
   - period: 2022 – 2023
     title: Data Science Intern
     org: Jules-Gonin Eye Hospital
     logo: /img/logos/jules-gonin.svg
     place: Lausanne, Switzerland
-    kind: research
-    short: "Deep learning on 5,211 3D OCT scans to extract retinal biomarkers; identified nine predictors of disease recurrence (first-author paper, Scientific Reports 2024)."
+    short: "Deep learning on 5,211 3D OCT scans to extract retinal biomarkers; identified nine predictors of disease recurrence (first-author paper, [Scientific Reports 2024](/projects/cscr-oct-biomarkers))."
     details:
-      - "Deep learning on 3D OCT scans (U-Nets) to extract retinal biomarkers from 5,211 scans; identified nine predictors of CSCR recurrence (first-author paper, Scientific Reports 2024)."
+      - "Deep learning on 3D OCT scans (U-Nets) to extract retinal biomarkers from 5,211 scans; identified nine predictors of CSCR recurrence (first-author paper, [Scientific Reports 2024](/projects/cscr-oct-biomarkers))."
       - "Contributed to Cohort Builder, a pipeline assembling patient cohorts from medical records and imaging data (MIE 2024)."
   - period: 2021 – 2022
     title: Research Assistant
     org: EPFL
     logo: /img/logos/epfl.svg
     place: Lausanne, Switzerland
-    kind: research
-    short: "Earlier projects: reinforcement learning (actor–critic) with a T5 transformer (NLP Lab); deep learning prediction of nuclear fusion disruptions (Swiss Plasma Center)."
+    short: "Reinforcement learning (actor–critic) with a T5 transformer (NLP Lab); deep learning prediction of nuclear fusion disruptions (Swiss Plasma Center)."
     details:
       - "NLP Lab: reinforcement-learning actor-critic training with a T5 transformer."
       - "CVLab & Swiss Plasma Center: deep learning predictions of nuclear fusion disruptions."
-  - period: 2025
-    title: Data Engineer
-    org: Liom
-    logo: /img/logos/liom.svg
-    place: Zürich, Switzerland
-    kind: industry
-    details:
-      - "Built a cloud-based data platform at a startup developing non-invasive glucose monitoring."
 
 teaching:
   - period: 2019 – 2023
@@ -117,15 +85,13 @@ teaching:
 #     details: ["Topic of the project."]
 mentoring: []   # TODO: add supervised students
 
-# TODO: review the skills.
+# TODO: review the skills (e.g. quantify multi-GPU training: number / type of GPUs).
 skills:
   - group: Research
-    items: [3D generative models, Flow matching & diffusion, Latent-space optimization, Shape representation, 3D computer vision, Physics-informed ML]
-  - group: ML frameworks
-    items: [PyTorch, PyTorch3D, Hugging Face Transformers, NumPy, multi-GPU / HPC training]
-  - group: Programming
-    items: [Python, C / C++, R, Git, Linux]
-  - group: Data & cloud
-    items: [Pandas, Polars, GCP, AWS, Dagster, Prefect, GitHub Actions]
+    items: [3D generative models, Flow matching & diffusion, Latent-space optimization, "Shape representation (SDF, meshes)", 3D computer vision, Physics-informed ML]
+  - group: ML & 3D
+    items: [PyTorch, PyTorch3D, Hugging Face Transformers, NumPy, Multi-GPU training on HPC clusters]
+  - group: Engineering
+    items: [Python, C / C++, Git, Linux, GitHub Actions, GCP, AWS]
   - group: Languages
     items: ["French (native)", "English (fluent, C1)"]

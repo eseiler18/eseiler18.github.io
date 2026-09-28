@@ -7,9 +7,8 @@ const pubs = await getPublications();
 const sections = (
   [
     ['Education', cv.education],
-    ['Fellowships & Awards', cv.awards],
-    ['Research Experience', cv.experience.filter((e) => e.kind !== 'industry')],
-    ['Industry Experience', cv.experience.filter((e) => e.kind === 'industry')],
+    ['Fellowships & Awards', cv.awards ?? []],
+    ['Experience', cv.experience],
     ['Mentoring', cv.mentoring ?? []],
     ['Teaching', cv.teaching],
   ] as [string, CvEntry[]][]
@@ -75,6 +74,7 @@ const sections = (
         ))
       }
     </ol>
+    <p class="full-list">Full list: <a href="/publications">publications page</a></p>
   </section>
 
   <section>
@@ -112,6 +112,7 @@ const sections = (
   .pubs li { margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.5; }
   .pubs a { color: var(--text); font-weight: 500; }
   .pubs a:hover { color: var(--accent); }
+  .full-list { font-size: 0.9rem; color: var(--text-faint); margin: 0.2rem 0 0; }
   .skills { display: grid; grid-template-columns: 170px 1fr; gap: 0.5rem 1.2rem; margin: 0; }
   .skills dt { font-weight: 600; font-size: 0.95rem; }
   .skills dd { margin: 0; color: var(--text-soft); font-size: 0.95rem; }

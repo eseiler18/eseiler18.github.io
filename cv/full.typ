@@ -9,23 +9,23 @@
 #set document(title: "Emilien Seiler — Curriculum Vitae")
 #set page(footer: context align(right, text(size: 8pt, fill: faint)[Emilien Seiler · #counter(page).display("1 / 1", both: true)]))
 #header(data, phone: phone)
-
-#row(text(size: 9pt, weight: 700, fill: soft, "Interests"), text(size: 9.2pt, data.profile.interests.join("  ·  ")))
+#summary(data)
 
 #section("Education")
 #entries(data.cv.education)
 
-#section("Fellowships & Awards")
-#entries(data.cv.awards)
+#let awards = data.cv.at("awards", default: ())
+#if awards.len() > 0 {
+  section("Fellowships & Awards")
+  entries(awards)
+}
 
 #section("Publications")
 #for p in data.publications { publication(p) }
+#note[Also on #link(data.site + "/publications", data.site.replace("https://", "") + "/publications")]
 
-#section("Research Experience")
-#entries(research(data))
-
-#section("Industry Experience")
-#entries(industry(data))
+#section("Experience")
+#entries(newest-first(data.cv.experience))
 
 #let mentoring = data.cv.at("mentoring", default: ())
 #if mentoring.len() > 0 {
