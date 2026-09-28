@@ -97,13 +97,14 @@ teaching:
 #     details: ["Topic of the project."]
 mentoring: []   # TODO: add supervised students
 
-# TODO: review the skills (e.g. quantify multi-GPU training: number / type of GPUs).
 skills:
   - group: Research
-    items: [3D generative models, Flow matching & diffusion, Latent-space optimization, "Shape representation (SDF, meshes)", 3D computer vision, Physics-informed ML]
-  - group: ML & 3D
-    items: [PyTorch, PyTorch3D, Hugging Face Transformers, NumPy, Multi-GPU training on HPC clusters]
+    items: [3D generative models, Flow matching & diffusion, Latent-space optimization, "Shape representation (SDF, meshes, point clouds)", Differentiable rendering, Neural fields & Gaussian Splatting, Physics-informed ML]
+  - group: ML & Training
+    items: [PyTorch, Hugging Face, Multi-GPU training (DDP), SLURM / HPC clusters]
+  - group: 3D
+    items: [PyTorch3D, nvdiffrast, trimesh, Open3D, Blender (Python)]
   - group: Engineering
-    items: [Python, C / C++, Git, Linux, GitHub Actions, GCP, AWS]
+    items: [Python, C++, CUDA, Linux, Git, Docker, GCP]
   - group: Languages
     items: ["French (native)", "English (fluent, C1)"]
