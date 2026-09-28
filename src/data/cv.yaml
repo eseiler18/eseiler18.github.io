@@ -20,7 +20,7 @@ education:
     place: Lausanne, Switzerland
     details:
       - "Advisor: Prof. Pascal Fua. Supported by the EDIC Fellowship."
-      - "First author of [Flow-Corrected Shape Optimization](/projects/fcso) (NeurIPS 2026), a method that keeps 3D shapes valid while optimizing them in the latent space of large generative models."
+      - "First author of [Flow-Corrected Shape Optimization (NeurIPS 2026)](/projects/fcso), a state-of-the-art framework for shape optimization in high-dimensional 3D generative models that leverages flow matching."
   - period: 2023 – 2024
     title: Master's Thesis
     org: Harvard University, IACS (Prof. Pavlos Protopapas)
