@@ -20,9 +20,7 @@ education:
     place: Lausanne, Switzerland
     details:
       - "Advisor: Prof. Pascal Fua. Supported by the EDIC Fellowship."
-      - "First-author [NeurIPS 2026](/projects/fcso) paper (FCSO): identified *manifold drift*, the failure of gradient-based optimization in the latent spaces of large 3D generative models."
-      - "Designed an optimizer–corrector method alternating free gradient steps with guided flow-matching corrections, keeping shapes valid without retraining the generative prior."
-      - "Scaled it from vector latent spaces to large 3D models (VecSet, Hunyuan3D) on aerodynamic drag, compliance and volume optimization."
+      - "First author of [Flow-Corrected Shape Optimization](/projects/fcso) (NeurIPS 2026), a method that keeps 3D shapes valid while optimizing them in the latent space of large generative models."
   - period: 2023 – 2024
     title: Master's Thesis
     org: Harvard University, IACS (Prof. Pavlos Protopapas)
