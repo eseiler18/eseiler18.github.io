@@ -1,0 +1,98 @@
+---
+import Base from '../layouts/Base.astro';
+import PubCard from '../components/PubCard.astro';
+import Icon, { type IconName } from '../components/Icon.astro';
+import { profile, news, getPublications, isSet, md } from '../lib/data';
+
+const pubs = await getPublications();
+const featured = pubs.filter((p) => p.featured);
+const links: { icon: IconName; label: string; href: string }[] = [
+  { icon: 'email', label: 'Email', href: `mailto:${profile.links.email}` },
+  { icon: 'scholar', label: 'Google Scholar', href: profile.links.scholar },
+  { icon: 'github', label: 'GitHub', href: profile.links.github },
+  { icon: 'linkedin', label: 'LinkedIn', href: profile.links.linkedin },
+  { icon: 'orcid', label: 'ORCID', href: profile.links.orcid },
+];
+const shownLinks = links.filter((l) => isSet(l.href) && l.href !== 'mailto:');
+---
+
+<Base>
+  <section class="hero">
+    <img class="photo" src={profile.photo} alt={`Portrait of ${profile.name}`} width="180" height="180" />
+    <div>
+      <h1>{profile.name}</h1>
+      <p class="role">
+        {profile.role}<br />
+        <a href={profile.affiliation_url} target="_blank" rel="noopener">{profile.affiliation}</a>
+      </p>
+      <ul class="socials">
+        <li><a class="pill solid" href="/cv"><Icon name="cv" size={14} /> CV</a></li>
+        {
+          shownLinks.map((l) => (
+            <li>
+              <a class="social" href={l.href} title={l.label} aria-label={l.label} target={l.href.startsWith('http') ? '_blank' : undefined} rel="noopener">
+                <Icon name={l.icon} />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="bio">
+    {profile.bio.map((p) => <p set:html={md(p)} />)}
+    <p class="interests">
+      <span class="faint">Research interests</span>
+      {profile.interests.map((i) => <span class="tag">{i}</span>)}
+    </p>
+  </section>
+
+  <section>
+    <h2>News</h2>
+    <ul class="news">
+      {
+        news.slice(0, 6).map((n) => (
+          <li>
+            <span class="date">{n.date}</span>
+            <span set:html={md(n.text)} />
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="section-title">Selected publications <a href="/publications">All publications →</a></h2>
+    <div>{featured.map((pub) => <PubCard pub={pub} compact />)}</div>
+  </section>
+</Base>
+
+<style>
+  .hero { display: grid; grid-template-columns: 180px 1fr; gap: 2.2rem; align-items: center; }
+  .photo { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; box-shadow: var(--shadow); }
+  h1 { font-size: 2.4rem; margin: 0 0 0.3rem; }
+  .role { color: var(--text-soft); margin: 0 0 1.1rem; line-height: 1.5; }
+  .socials { display: flex; align-items: center; flex-wrap: wrap; gap: 0.4rem; list-style: none; padding: 0; margin: 0; }
+  .socials li:first-child { margin-right: 0.4rem; }
+  .social {
+    display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%;
+    color: var(--text-soft); border: 1px solid var(--line); transition: color 0.15s, border-color 0.15s, transform 0.15s;
+  }
+  .social:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-1px); }
+  .bio { margin-top: 2.4rem; }
+  .bio :global(p) { font-size: 1.02rem; }
+  .interests { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem; margin-top: 1.4rem; font-size: 0.9rem; }
+  .interests .faint { margin-right: 0.3rem; }
+  .tag { padding: 0.15em 0.65em; border-radius: 6px; background: var(--bg-soft); color: var(--text-soft); font-size: 0.85rem; }
+  .news { list-style: none; padding: 0; margin: 0; }
+  .news li { display: grid; grid-template-columns: 90px 1fr; gap: 1rem; padding: 0.45rem 0; font-size: 0.97rem; }
+  .date { color: var(--text-faint); font-variant-numeric: tabular-nums; font-size: 0.9rem; padding-top: 0.08rem; }
+
+  @media (max-width: 620px) {
+    .hero { grid-template-columns: 1fr; gap: 1.2rem; text-align: left; }
+    .photo { width: 120px; height: 120px; }
+    h1 { font-size: 2rem; }
+    .news li { grid-template-columns: 1fr; gap: 0; }
+  }
+</style>

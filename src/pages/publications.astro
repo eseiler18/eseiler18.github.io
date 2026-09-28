@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import PubCard from '../components/PubCard.astro';
+import { profile, getPublications, isSet } from '../lib/data';
+
+const pubs = await getPublications();
+const years = [...new Set(pubs.map((p) => p.year))].sort((a, b) => b - a);
+---
+
+<Base title="Publications" description={`Publications of ${profile.name}.`}>
+  <h1>Publications</h1>
+  <p class="muted intro">
+    Papers where I am first author have their own page; the others link to the paper or the first author's project page.
+    {isSet(profile.links.scholar) && (
+      <>See also my <a href={profile.links.scholar} target="_blank" rel="noopener">Google Scholar</a> profile.</>
+    )}
+  </p>
+
+  {
+    years.map((y) => (
+      <section>
+        <h2 class="year">{y}</h2>
+        {pubs.filter((p) => p.year === y).map((pub) => <PubCard pub={pub} />)}
+      </section>
+    ))
+  }
+</Base>
+
+<style>
+  h1 { font-size: 2.1rem; margin: 0 0 0.6rem; }
+  .intro { font-size: 0.95rem; }
+  .year { font-family: var(--font-sans); font-size: 0.95rem; font-weight: 600; color: var(--text-faint); letter-spacing: 0.05em; margin: 2.2rem 0 0.2rem; }
+</style>

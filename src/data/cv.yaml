@@ -1,0 +1,83 @@
+# Source of the HTML CV (/cv). Publications are pulled automatically from
+# publications.json, so they are not listed here. Newest first everywhere.
+
+education:
+  - period: 2025 – present
+    title: Ph.D. in Computer and Communication Sciences (EDIC)
+    org: EPFL, Computer Vision Laboratory
+    place: Lausanne, Switzerland
+    details:
+      - "Advisor: Prof. Pascal Fua."
+      - "Topic: shape optimization in the latent spaces of 3D generative models."
+  - period: 2023 – 2024
+    title: Master's Thesis
+    org: Harvard University
+    place: Boston, USA
+    details:
+      - "Physics-Informed Neural Networks for Solving Differential Equations in Stiffness Regimes: A Multi-Head Architecture and Transfer Learning Approach. Grade 5.75/6."
+  - period: 2021 – 2024
+    title: M.Sc. in Computational Science and Engineering
+    org: EPFL
+    place: Lausanne, Switzerland
+    details:
+      - "GPA 5.42/6."
+  - period: 2018 – 2021
+    title: B.Sc. in Environmental Sciences and Engineering
+    org: EPFL
+    place: Lausanne, Switzerland
+    details:
+      - "GPA 5.2/6."
+
+awards:
+  - period: "2025"
+    title: EDIC Fellowship
+    org: EPFL Doctoral School in Computer and Communication Sciences
+    details:
+      - "One-year fellowship for incoming PhD students, allowing them to explore research labs before choosing a thesis director."
+
+experience:
+  - period: 2025
+    title: Data Engineer
+    org: Liom
+    place: Zürich, Switzerland
+    details:
+      - "Built a cloud-based data platform at a startup working on non-invasive glucose monitoring."
+  - period: 2023 – 2024
+    title: Research Assistant
+    org: Harvard University
+    place: Boston, USA
+    details:
+      - "Developed a new method addressing the failure modes of vanilla PINNs in stiff systems."
+  - period: 2022 – 2023
+    title: Data Science Intern
+    org: Jules-Gonin Eye Hospital
+    place: Lausanne, Switzerland
+    details:
+      - "Deep learning models for predicting eye disease progression; computer vision on 3D OCT images."
+  - period: 2021 – 2022
+    title: Research Assistant
+    org: EPFL
+    place: Lausanne, Switzerland
+    details:
+      - "NLP Lab: reinforcement-learning actor-critic training with a T5 transformer."
+      - "CVLab & Swiss Plasma Center: deep learning predictions of nuclear fusion disruptions."
+
+teaching:
+  - period: 2019 – 2023
+    title: Teaching Assistant
+    org: EPFL
+    details:
+      - "Mathematical Analysis, Computer Science, Probability and Statistics, Mechanical Physics."
+
+# TODO: review and update the skills.
+skills:
+  - group: Research
+    items: [3D generative models, Flow matching, Diffusion models, Latent-space optimization, Shape optimization, Physics-informed ML, Computer vision]
+  - group: Machine learning
+    items: [PyTorch, PyTorch3D, Transformers, Reinforcement learning, Transfer learning, HPC / multi-GPU training]
+  - group: Programming
+    items: [Python, C / C++, R, Git, LaTeX]
+  - group: Data & MLOps
+    items: [Pandas, Polars, GCP, AWS, Dagster, Prefect, GitHub Actions]
+  - group: Languages
+    items: [French (native), English (fluent, C1)]

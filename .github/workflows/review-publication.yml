@@ -1,0 +1,42 @@
+name: Review a new paper (email reply)
+
+# Replying to the notification email of a "new-publication" issue posts a comment here.
+# "non" -> the paper is hidden and the site redeployed; "oui" -> the issue is closed.
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: write
+  actions: write
+
+jobs:
+  decide:
+    # Only the repository owner can accept or reject.
+    if: >-
+      contains(github.event.issue.labels.*.name, 'new-publication') &&
+      github.event.issue.state == 'open' &&
+      github.event.comment.author_association == 'OWNER'
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      COMMENT: ${{ github.event.comment.body }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - run: pip install pyyaml
+      - name: Apply decision
+        run: |
+          result=$(python scripts/review.py decide "${{ github.event.issue.number }}" "$COMMENT")
+          echo "$result"
+          if [ "$result" = "changed" ]; then
+            git config user.name "publications-bot"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -A src/data src/content public/projects
+            git commit -m "Hide publication (rejected by email, issue #${{ github.event.issue.number }})"
+            git push
+            gh workflow run deploy.yml --ref main
+          fi

@@ -1,0 +1,48 @@
+# Identity and links shown on every page.
+name: Emilien Seiler
+role: PhD Student in Computer Vision
+affiliation: Computer Vision Laboratory (CVLab), EPFL
+affiliation_url: https://www.epfl.ch/labs/cvlab/
+advisor: Prof. Pascal Fua
+advisor_url: https://people.epfl.ch/pascal.fua
+location: Lausanne, Switzerland
+photo: /img/profile.jpg
+
+# Short bio for the home page (Markdown links allowed: [text](url)).
+bio:
+  - >-
+    I am a PhD student at [EPFL](https://www.epfl.ch) in the
+    [Computer Vision Laboratory](https://www.epfl.ch/labs/cvlab/), advised by
+    [Prof. Pascal Fua](https://people.epfl.ch/pascal.fua), and supported by an
+    EDIC Fellowship. My research focuses on optimizing 3D shapes within the latent
+    spaces of large generative models, keeping them valid while
+    pushing them towards engineering objectives such as aerodynamic drag or stiffness.
+  - >-
+    Before my PhD, I obtained an M.Sc. in Computational Science and Engineering from EPFL,
+    and wrote my Master's thesis at [Harvard University](https://iacs.seas.harvard.edu/)
+    with [Prof. Pavlos Protopapas](https://pll.harvard.edu/instructor/pavlos-protopapas)
+    on physics-informed neural networks for stiff differential equations. I have also worked
+    on deep learning for ophthalmology at the Jules-Gonin Eye Hospital and as a data engineer
+    at Liom.
+
+interests:
+  - 3D generative models
+  - Shape optimization
+  - Flow matching & diffusion
+  - Scientific machine learning
+
+# Every name under which papers are published, used to highlight the name
+# and to detect first-authored papers (they get their own page).
+name_variants:
+  - Emilien Seiler
+  - E. Seiler
+  - Seiler, Emilien
+  - Seiler E
+
+links:
+  email: emilien.seiler@epfl.ch
+  scholar: https://scholar.google.com/citations?user=2ZyukIMAAAAJ
+  github: https://github.com/eseiler18
+  linkedin: https://www.linkedin.com/in/emilien-seiler/
+  orcid: ""                                                 # optional
+  cv: /cv/Emilien_Seiler_CV.pdf

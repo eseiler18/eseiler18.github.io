@@ -1,0 +1,48 @@
+---
+import { coauthors, isMe, isSet } from '../lib/data';
+
+interface Props {
+  authors: string[];
+  equal?: string[];
+  linked?: boolean;
+  max?: number;
+}
+const { authors, equal = [], linked = true, max } = Astro.props;
+// Long author lists are shortened but always keep my name:
+// "A, B, C, …, Emilien Seiler, …" or "A, B, Emilien Seiler, et al."
+const ELLIPSIS = '…';
+const ETAL = 'et al.';
+function shorten(list: string[], n: number): string[] {
+  const mine = list.findIndex(isMe);
+  if (mine < n) return [...list.slice(0, n), ETAL];
+  const out = [...list.slice(0, n - 1), ELLIPSIS, list[mine]];
+  return mine < list.length - 1 ? [...out, ELLIPSIS] : out;
+}
+const shown = max && authors.length > max ? shorten(authors, max) : authors;
+---
+
+<span class="authors">
+  {
+    shown.map((a, i) => (
+      <>
+        {a === ELLIPSIS || a === ETAL ? (
+          <span class="faint">{a}</span>
+        ) : isMe(a) ? (
+          <strong class="me">{a}</strong>
+        ) : linked && isSet(coauthors[a]) ? (
+          <a href={coauthors[a]} target="_blank" rel="noopener">{a}</a>
+        ) : (
+          <span>{a}</span>
+        )}
+        {equal.includes(a) && <sup>*</sup>}
+        {i < shown.length - 1 && ', '}
+      </>
+    ))
+  }
+</span>
+
+<style>
+  .authors a { color: inherit; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; }
+  .authors a:hover { color: var(--accent); text-decoration-color: currentColor; }
+  .me { color: var(--text); }
+</style>

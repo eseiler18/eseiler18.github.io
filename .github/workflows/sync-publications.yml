@@ -1,0 +1,41 @@
+name: Sync publications (Google Scholar + OpenAlex)
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'   # every Monday, 06:00 UTC
+  workflow_dispatch:
+    inputs:
+      test_paper:
+        description: 'Add a fake paper to test the email review (reply "non" to remove it)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  issues: write
+  actions: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - run: pip install -r scripts/requirements.txt
+      - run: python scripts/sync_scholar.py --report "$RUNNER_TEMP/new.json" ${{ inputs.test_paper && '--test-paper' || '' }}
+      - name: Commit, redeploy and notify
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then echo "No changes."; exit 0; fi
+          git config user.name "publications-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A src/data src/content public/projects
+          git commit -m "Update publications from Scholar/OpenAlex"
+          git push
+          # Pushes made with GITHUB_TOKEN do not trigger other workflows: start the deploy explicitly.
+          gh workflow run deploy.yml --ref main
+          # One issue per new paper: GitHub emails it, and replying "non" hides the paper.
+          python scripts/review.py notify "$RUNNER_TEMP/new.json"
