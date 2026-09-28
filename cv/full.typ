@@ -7,10 +7,10 @@
 
 #show: setup
 #set document(title: "Emilien Seiler — Curriculum Vitae")
-#set page(footer: context align(center, text(size: 8.5pt, fill: soft)[Emilien Seiler — #counter(page).display("1 / 1", both: true)]))
+#set page(footer: context align(right, text(size: 8pt, fill: faint)[Emilien Seiler · #counter(page).display("1 / 1", both: true)]))
 #header(data, phone: phone)
 
-#text(size: 9.5pt)[*Research interests:* #data.profile.interests.join(", ").]
+#row(text(size: 9pt, weight: 700, fill: soft, "Interests"), text(size: 9.2pt, data.profile.interests.join("  ·  ")))
 
 #section("Education")
 #entries(data.cv.education)
@@ -19,7 +19,7 @@
 #entries(data.cv.awards)
 
 #section("Publications")
-#for (i, p) in data.publications.enumerate() { publication(p, i + 1) }
+#for p in data.publications { publication(p) }
 
 #section("Research Experience")
 #entries(research(data))

@@ -14,8 +14,8 @@
 #entries(keep(data.cv.education), short: true)
 
 #section("Publications")
-#for (i, p) in data.publications.filter(p => p.featured).enumerate() { publication(p, i + 1) }
-#text(size: 9pt, fill: soft)[Full list: #link(data.site + "/publications", data.site.replace("https://", "") + "/publications")]
+#for p in data.publications.filter(p => p.featured) { publication(p) }
+#note[Full list: #link(data.site + "/publications", data.site.replace("https://", "") + "/publications")]
 
 #section("Research Experience")
 #entries(keep(research(data)), short: true)
