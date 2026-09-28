@@ -34,6 +34,7 @@ const sections: [string, CvEntry[]][] = [
         {entries.map((e) => (
           <div class="entry">
             <div class="period">{e.period}</div>
+            <div class="logo">{e.logo && <img src={e.logo} alt={e.org ?? ''} loading="lazy" />}</div>
             <div>
               <div class="what">
                 <strong>{e.title}</strong>
@@ -91,7 +92,12 @@ const sections: [string, CvEntry[]][] = [
   .placeholder { cursor: default; color: var(--text-faint); border-style: dashed; }
   .placeholder:hover { color: var(--text-faint); border-color: var(--line); }
   h2 { border-bottom: 1px solid var(--line); padding-bottom: 0.4rem; }
-  .entry { display: grid; grid-template-columns: 130px 1fr; gap: 1.2rem; padding: 0.55rem 0; }
+  .entry { display: grid; grid-template-columns: 110px 48px 1fr; gap: 1.1rem; padding: 0.6rem 0; align-items: start; }
+  .logo {
+    width: 48px; height: 48px; border-radius: 10px; display: grid; place-items: center;
+  }
+  .logo:has(img) { background: #fff; border: 1px solid var(--line); }
+  .logo img { max-width: 36px; max-height: 36px; object-fit: contain; }
   .period { color: var(--text-faint); font-size: 0.9rem; font-variant-numeric: tabular-nums; padding-top: 0.1rem; }
   .entry ul { margin: 0.25rem 0 0; padding-left: 1.1rem; color: var(--text-soft); font-size: 0.95rem; }
   .pubs { padding-left: 1.3rem; margin: 0; }
@@ -103,7 +109,9 @@ const sections: [string, CvEntry[]][] = [
   .skills dd { margin: 0; color: var(--text-soft); font-size: 0.95rem; }
 
   @media (max-width: 620px) {
-    .entry, .skills { grid-template-columns: 1fr; gap: 0.1rem; }
+    .entry { grid-template-columns: 48px 1fr; gap: 0.2rem 0.9rem; }
+    .entry .period { grid-column: 1 / -1; }
+    .skills { grid-template-columns: 1fr; gap: 0.1rem; }
     .skills dd { margin-bottom: 0.6rem; }
   }
 </style>
