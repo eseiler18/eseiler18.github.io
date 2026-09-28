@@ -42,7 +42,7 @@
 
 #let setup(body) = {
   set document(author: "Emilien Seiler")
-  set page(paper: "a4", margin: (left: 1.8cm, right: 1.8cm, top: 1.6cm, bottom: 1.4cm))
+  set page(paper: "a4", margin: (x: 1.8cm, y: 1.5cm))
   set text(font: sans, size: 10pt, fill: ink, lang: "en", number-type: "lining")
   set par(justify: false, leading: 0.68em, spacing: 0.75em)
   set list(indent: 0pt, body-indent: 0.55em, spacing: 0.55em, marker: text(fill: accent, size: 0.8em, baseline: -0.05em, "▸"))

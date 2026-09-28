@@ -8,6 +8,8 @@
 
 #show: setup
 #set document(title: "Emilien Seiler — Resume")
+// Equal free space above and below the content (the two `1fr` share what is left).
+#v(1fr)
 #header(data, phone: phone)
 #summary(data)
 
@@ -30,3 +32,5 @@
 
 #section("Skills")
 #skills(data.cv.skills)
+
+#v(1fr)
