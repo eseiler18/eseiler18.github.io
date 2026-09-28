@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import AuthorList from '../components/AuthorList.astro';
-import { profile, cv, getPublications, type CvEntry } from '../lib/data';
+import { profile, cv, getPublications, isSet, type CvEntry } from '../lib/data';
 
 const pubs = await getPublications();
 const sections: [string, CvEntry[]][] = [
@@ -18,7 +18,13 @@ const sections: [string, CvEntry[]][] = [
       <h1>Curriculum Vitae</h1>
       <p class="muted">{profile.name} · {profile.role}, {profile.affiliation}</p>
     </div>
-    <a class="pill solid" href={profile.links.cv} download>Download PDF</a>
+    {
+      isSet(profile.links.cv) ? (
+        <a class="pill solid" href={profile.links.cv} download>Download PDF</a>
+      ) : (
+        <span class="pill placeholder" title="An updated PDF version is on its way">PDF version coming soon</span>
+      )
+    }
   </header>
 
   {
@@ -82,6 +88,8 @@ const sections: [string, CvEntry[]][] = [
   .cv-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
   h1 { font-size: 2.1rem; margin: 0 0 0.3rem; }
   .cv-head p { margin: 0; }
+  .placeholder { cursor: default; color: var(--text-faint); border-style: dashed; }
+  .placeholder:hover { color: var(--text-faint); border-color: var(--line); }
   h2 { border-bottom: 1px solid var(--line); padding-bottom: 0.4rem; }
   .entry { display: grid; grid-template-columns: 130px 1fr; gap: 1.2rem; padding: 0.55rem 0; }
   .period { color: var(--text-faint); font-size: 0.9rem; font-variant-numeric: tabular-nums; padding-top: 0.1rem; }
