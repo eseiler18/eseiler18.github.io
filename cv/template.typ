@@ -129,7 +129,7 @@
     #grid(
       columns: (1fr, auto),
       column-gutter: 0.8em,
-      [#text(weight: 700, e.title)#if org != none [#h(0.35em)#text(fill: soft, style: "italic", org)]],
+      [#text(weight: 700, e.title)#if org != none [#text(fill: faint)[#h(0.4em)|#h(0.4em)]#text(weight: 500, fill: ink, org)]],
       if place != none { text(size: 8.8pt, fill: faint, place) },
     )
     #set par(spacing: 0.24em)
