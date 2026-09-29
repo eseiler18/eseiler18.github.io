@@ -118,7 +118,7 @@ def fetch_openalex(cfg: dict) -> list[dict]:
             "authors": [a["author"]["display_name"] for a in w["authorships"]],
             "year": w["publication_year"],
             "date": w.get("publication_date") or "",
-            "venue": "arXiv preprint" if "arxiv" in source.lower() else source,
+            "venue": "arXiv" if "arxiv" in source.lower() else source,
             "type": "preprint" if w.get("type") == "preprint" else "paper",
             "doi": "" if doi.lower().startswith("10.48550/") else doi,
             "arxiv": arxiv,
