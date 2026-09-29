@@ -6,7 +6,7 @@ affiliation_url: https://www.epfl.ch/labs/cvlab/
 advisor: Prof. Pascal Fua
 advisor_url: https://people.epfl.ch/pascal.fua
 location: Lausanne, Switzerland
-photo: ""   # e.g. /img/profile.jpg (file in public/img/); empty = no photo
+photo: /img/portrait.jpg   # file in public/img/; empty = no photo
 
 # Short bio for the home page (Markdown links allowed: [text](url)).
 bio:
