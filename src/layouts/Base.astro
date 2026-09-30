@@ -16,6 +16,23 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 // Link previews (WhatsApp, Slack, LinkedIn...): the paper's figure on paper pages, else the ES card.
 const ogImage = new URL(image ?? '/og-image-v3.png', Astro.site);
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+// Structured data: tells search engines this site is the official page of this person.
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  url: Astro.site?.toString(),
+  image: profile.photo ? new URL(profile.photo, Astro.site).toString() : undefined,
+  jobTitle: profile.role,
+  affiliation: { '@type': 'Organization', name: 'EPFL', url: 'https://www.epfl.ch' },
+  alumniOf: [{ '@type': 'CollegeOrUniversity', name: 'EPFL' }, { '@type': 'CollegeOrUniversity', name: 'Harvard University' }],
+  knowsAbout: profile.interests,
+  email: `mailto:${profile.links.email}`,
+  sameAs: [profile.links.scholar, profile.links.github, profile.links.linkedin, profile.links.orcid].filter(
+    (u) => u && u.startsWith('http') && !u.includes('TODO'),
+  ),
+};
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
 const nav = [
   { href: '/', label: 'About' },
   { href: '/publications', label: 'Publications' },
@@ -57,6 +74,8 @@ const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWi
         if (t) document.documentElement.dataset.theme = t;
       } catch {}
     </script>
+    <link rel="sitemap" href="/sitemap.xml" />
+    {isHome && <script type="application/ld+json" set:html={JSON.stringify(person)} />}
     <slot name="head" />
   </head>
   <body>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://eseiler18.github.io/sitemap.xml
