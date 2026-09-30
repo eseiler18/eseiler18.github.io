@@ -5,7 +5,7 @@ teaser:
   src: /projects/fcso/figure1.jpg
   caption: "(a) Manifold drift: gradient descent reduces bike compliance and car drag, but the shapes stop being valid. (b) FCSO reaches the same objective values while the shapes stay valid. (c) FCSO alternates gradient descent (GD) steps and flow-matching (FM) corrections, shown here for volume reduction."
 video:
-  src: /projects/fcso/fcso_explainer_v2.mp4
+  src: /projects/fcso/fcso_explainer_v3.mp4
   poster: /projects/fcso/poster_v2.jpg
   caption: "A 2.5-minute explainer of manifold drift and FCSO (with voice-over and captions)."
 comparisons:
