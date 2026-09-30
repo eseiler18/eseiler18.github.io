@@ -133,6 +133,13 @@ const buttons = [
   .prose :global(figure) { margin: 1.8rem auto; max-width: 560px; }
   .prose :global(figure.wide) { max-width: 100%; }
   .prose :global(figure img) { width: 100%; border-radius: var(--radius); background: #fff; }
+  .prose :global(.table-wrap) { overflow-x: auto; margin: 1.6rem 0 0.4rem; }
+  .prose :global(table) { width: 100%; border-collapse: collapse; font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+  .prose :global(th), .prose :global(td) { padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .prose :global(th) { font-weight: 600; color: var(--text-soft); border-bottom: 1.5px solid var(--text-faint); }
+  .prose :global(td:first-child), .prose :global(th:first-child) { white-space: normal; text-align: left; padding-left: 0; }
+  .prose :global(td:last-child), .prose :global(th:last-child) { color: var(--accent); }
+  .prose :global(.table-caption) { font-size: 0.85rem; color: var(--text-soft); margin-top: 0.5rem; }
   .prose :global(figcaption) { font-size: 0.88rem; color: var(--text-soft); margin-top: 0.7rem; text-align: center; }
   .prose, .prose-width { max-width: var(--prose); margin-left: auto; margin-right: auto; }
   .draft { background: #fff3cd; color: #664d03; padding: 0.6rem 1rem; border-radius: 8px; font-size: 0.9rem; }

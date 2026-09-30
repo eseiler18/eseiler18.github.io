@@ -41,9 +41,16 @@ We evaluate FCSO on three tasks of increasing complexity: reducing the volume of
 and maximizing the stiffness of objects under load with the Hunyuan3D foundation model.
 At the same objective value, FCSO produces the most realistic shapes compared to state-of-the-art baselines, and the gap grows with the size of the model.
 
-<figure class="wide">
-  <img src="/projects/fcso/hunyuan_results.jpg" alt="Stiffness optimization results on Hunyuan3D" loading="lazy" />
-  <figcaption>Stiffness optimization in Hunyuan3D: initial shapes with the applied load (red arrow) and results of each method; C is the compliance (lower is stiffer).</figcaption>
-</figure>
+<div class="table-wrap">
+
+| Task (shape prior) | GD | FMG | D-Flow | ICTM | SGO | **FCSO** |
+|---|---:|---:|---:|---:|---:|---:|
+| Chair volume −70% (3DShape2VecSet) | 88.1 | 43.1 | 56.9 | 91.7 | 32.7 | **31.8** |
+| Car drag −30% (3DShape2VecSet) | 132.8 | 100.2 | 108.8 | 101.7 | 107.7 | **89.1** |
+| Bicycle compliance −80% (Hunyuan3D) | 43.1 | 28.8 | OOM | 26.8 | 28.8 | **21.3** |
+| Chair compliance −65% (Hunyuan3D) | 68.2 | 55.7 | OOM | 55.9 | 55.1 | **41.3** |
+
+</div>
+<p class="table-caption">Shape realism (FID on Inception features, lower is better), measured once every method has reached the same objective reduction. OOM: out of memory.</p>
 
 See the [paper](https://arxiv.org/abs/2608.07199) for the full benchmark and ablations.
