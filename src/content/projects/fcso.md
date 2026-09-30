@@ -37,7 +37,7 @@ Repeating this cycle keeps improving the objective without accumulating geometri
 
 ## Results
 
-We evaluate FCSO on three tasks of increasing complexity: reducing the volume of chairs, reducing the aerodynamic drag of cars (confirmed with CFD simulations),
+We evaluate FCSO on three tasks of increasing complexity: reducing the volume of chairs, reducing the aerodynamic drag of cars,
 and maximizing the stiffness of objects under load with the Hunyuan3D foundation model.
 At the same objective value, FCSO produces the most realistic shapes compared to state-of-the-art baselines, and the gap grows with the size of the model.
 
