@@ -14,7 +14,7 @@ comparisons:
   labels: [Gradient descent, FCSO (ours)]
   rows:
     - { name: "Chair · volume", left: /projects/fcso/chair_vecset_gd.gif, right: /projects/fcso/chair_vecset_fcso.gif }
-    - { name: "Car · drag", left: /projects/fcso/car_vecset_gd.gif, right: /projects/fcso/car_vecset_fcso.gif }
+    - { name: "Car · drag", left: /projects/fcso/car_vecset_gd_v2.gif, right: /projects/fcso/car_vecset_fcso_v2.gif }
     - { name: "Bike · stiffness", left: /projects/fcso/velo_hunyuan_gd.gif, right: /projects/fcso/velo_hunyuan_fcso.gif }
 ---
 
