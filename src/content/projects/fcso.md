@@ -18,21 +18,32 @@ comparisons:
     - { name: "Bike · stiffness", left: /projects/fcso/velo_hunyuan_gd.gif, right: /projects/fcso/velo_hunyuan_fcso.gif }
 ---
 
-## Method
+## Why it matters
 
-Modern 3D generative models decode a latent code into a shape. Valid shapes lie on a thin manifold
-of that latent space, and the manifold takes up a smaller and smaller share of the space as models get bigger.
-Plain gradient descent on an engineering objective ignores the manifold and drifts away from it.
-We call this **manifold drift**.
+Modern 3D generative models such as VecSet or Hunyuan3D are extremely expressive, but valid shapes only occupy a thin manifold of their high-dimensional latent space.
+When we optimize a shape for an engineering objective, plain gradient descent quickly leaves this manifold and the shape stops being valid: we call this **manifold drift**.
+Existing fixes either rely on a delicate guidance trade-off or are too costly for large models.
 
-Existing fixes built on flow matching either do objective guidance and generation in a single pass,
-which forces a trade-off, or backpropagate through the whole flow, which does not scale to large models.
-**FCSO gives each job its own step** and repeats the following cycle:
+## How FCSO works
 
-1. **Optimize:** take a few plain gradient steps on the objective.
-2. **Correct:** partially re-noise the latent, then let a pre-trained flow model carry it back onto the
-   manifold, guided by the objective value reached in step 1.
+**Optimize freely, correct strictly.** FCSO alternates two phases: a few free gradient steps on the objective,
+then a correction where the latent is partially re-noised and a pre-trained flow-matching model carries it back onto the manifold of valid shapes.
+Repeating this cycle keeps improving the objective without accumulating geometric errors, and works with pre-trained models, without any retraining.
 
-Each cycle makes progress on the objective, then returns the latent to the manifold. FCSO works with generative priors ranging from
-simple vector latent spaces to large-scale models such as Hunyuan3D, on tasks such as aerodynamic
-drag reduction, volume reduction and compliance optimization.
+<figure>
+  <img src="/projects/fcso/method.jpg" alt="FCSO method diagram" loading="lazy" />
+  <figcaption>FCSO alternates gradient-based optimization (Phase 1) and a guided flow-matching correction (Phase 2), repeated K times.</figcaption>
+</figure>
+
+## Results
+
+We evaluate FCSO on three tasks of increasing complexity: reducing the volume of chairs, reducing the aerodynamic drag of cars (confirmed with CFD simulations),
+and maximizing the stiffness of objects under load with the Hunyuan3D foundation model.
+At the same objective value, FCSO produces the most realistic shapes compared to state-of-the-art baselines, and the gap grows with the size of the model.
+
+<figure class="wide">
+  <img src="/projects/fcso/hunyuan_results.jpg" alt="Stiffness optimization results on Hunyuan3D" loading="lazy" />
+  <figcaption>Stiffness optimization in Hunyuan3D: initial shapes with the applied load (red arrow) and results of each method; C is the compliance (lower is stiffer).</figcaption>
+</figure>
+
+See the [paper](https://arxiv.org/abs/2608.07199) for the full benchmark and ablations.

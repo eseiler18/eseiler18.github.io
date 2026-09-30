@@ -129,6 +129,11 @@ const buttons = [
 
 <style>
   .project { --prose: 760px; }
+  /* Figures written inside the Markdown body of a project page */
+  .prose :global(figure) { margin: 1.8rem auto; max-width: 560px; }
+  .prose :global(figure.wide) { max-width: 100%; }
+  .prose :global(figure img) { width: 100%; border-radius: var(--radius); background: #fff; }
+  .prose :global(figcaption) { font-size: 0.88rem; color: var(--text-soft); margin-top: 0.7rem; text-align: center; }
   .prose, .prose-width { max-width: var(--prose); margin-left: auto; margin-right: auto; }
   .draft { background: #fff3cd; color: #664d03; padding: 0.6rem 1rem; border-radius: 8px; font-size: 0.9rem; }
 
