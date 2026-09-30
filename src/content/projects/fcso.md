@@ -53,4 +53,4 @@ At the same objective value, FCSO produces the most realistic shapes compared to
 </div>
 <p class="table-caption">Shape realism (FID on Inception features, lower is better), measured once every method has reached the same objective reduction. OOM: out of memory.</p>
 
-See the [paper](https://arxiv.org/abs/2608.07199) for the full benchmark and ablations.
+See the [full paper](https://arxiv.org/abs/2608.07199) for more results.
