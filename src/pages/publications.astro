@@ -12,7 +12,7 @@ const years = [...new Set(pubs.map((p) => p.year))].sort((a, b) => b - a);
   <p class="muted intro">
     Papers where I am first author have their own page; the others link to the paper or the first author's project page.
     {isSet(profile.links.scholar) && (
-      <>See also my <a href={profile.links.scholar} target="_blank" rel="noopener">Google Scholar</a> profile.</>
+      <> See also my <a href={profile.links.scholar} target="_blank" rel="noopener">Google Scholar</a> profile.</>
     )}
   </p>
 

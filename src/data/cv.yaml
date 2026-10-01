@@ -19,7 +19,7 @@ education:
     logo: /img/logos/epfl.svg
     place: Lausanne, Switzerland
     details:
-      - "Advisor: Prof. Pascal Fua. Supported by the EDIC Fellowship."
+      - "Advisor: Prof. Pascal Fua. Supported by an EDIC Fellowship."
       - "First author of [Flow-Corrected Shape Optimization (NeurIPS 2026)](/projects/fcso), a state-of-the-art framework for shape optimization in high-dimensional 3D generative models that leverages flow matching."
   - period: 2023 – 2024
     title: Master's Thesis
@@ -56,9 +56,9 @@ experience:
     org: Jules-Gonin Eye Hospital
     logo: /img/logos/jules-gonin.svg
     place: Lausanne, Switzerland
-    short: "Engineered deep learning models on high-resolution OCT scans to discover 9 clinical biomarkers of CSCR recurrence; published as first author in [Scientific Reports (2024)](/projects/cscr-oct-biomarkers)."
+    short: "Engineered deep learning models on high-resolution OCT scans to discover 9 clinical biomarkers of CSCR recurrence; published as first author in [Scientific Reports 2024](/projects/cscr-oct-biomarkers)."
     details:
-      - "Engineered deep learning models on high-resolution OCT scans to discover 9 clinical biomarkers of CSCR recurrence; published as first author in [Scientific Reports (2024)](/projects/cscr-oct-biomarkers)."
+      - "Engineered deep learning models on high-resolution OCT scans to discover 9 clinical biomarkers of CSCR recurrence; published as first author in [Scientific Reports 2024](/projects/cscr-oct-biomarkers)."
       - "Co-developed Cohort Builder, a software pipeline that assembles patient cohorts from medical records and ophthalmic imaging data ([MIE 2024](https://doi.org/10.3233/shti240613))."
   - period: 2021 – 2022
     title: Research Assistant
@@ -83,7 +83,7 @@ teaching:
     resume: false
     short: "Mathematical analysis, computer science, probability & statistics, physics."
     details:
-      - "Mathematical Analysis, Computer Science, Probability and Statistics, Mechanical Physics."
+      - "Mathematical analysis, computer science, probability & statistics, physics."
 
 # Students supervised during the PhD. Section hidden while empty. Example:
 #   - period: Spring 2026

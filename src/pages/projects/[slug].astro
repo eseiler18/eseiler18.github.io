@@ -3,7 +3,7 @@ import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import AuthorList from '../../components/AuthorList.astro';
 import Bibtex from '../../components/Bibtex.astro';
-import { getPublicationById, getPublications } from '../../lib/data';
+import { getPublicationById, getPublications, venueDetail } from '../../lib/data';
 
 export async function getStaticPaths() {
   const pubs = await getPublications();
@@ -32,7 +32,10 @@ const buttons = [
     {draft && <p class="draft">Draft: this page is not published (remove <code>draft: true</code> to publish).</p>}
 
     <header class="head">
-      {pub.venue && <p class="venue"><span class="badge">{pub.venue}</span></p>}
+      <p class="venue">
+        {pub.venueShort && <span class="badge">{pub.venueShort}</span>}
+        <span class="muted">{venueDetail(pub)}</span>
+      </p>
       <h1>{pub.title}</h1>
       <p class="authors"><AuthorList authors={pub.authors} equal={pub.equalContribution} /></p>
       {pub.equalContribution.length > 0 && <p class="faint small">* Equal contribution</p>}
@@ -145,7 +148,7 @@ const buttons = [
   .draft { background: #fff3cd; color: #664d03; padding: 0.6rem 1rem; border-radius: 8px; font-size: 0.9rem; }
 
   .head { text-align: center; max-width: 900px; margin: 0.5rem auto 2.2rem; }
-  .venue { margin: 0 0 0.9rem; }
+  .venue { margin: 0 0 0.9rem; display: flex; justify-content: center; align-items: center; gap: 0.55rem; flex-wrap: wrap; font-size: 0.95rem; }
   .venue .badge { font-size: 0.85rem; padding: 0.2em 0.8em; }
   h1 { font-size: clamp(1.7rem, 4vw, 2.5rem); margin: 0 0 1rem; line-height: 1.2; }
   .authors { font-size: 1.05rem; color: var(--text-soft); margin: 0 0 0.4rem; }

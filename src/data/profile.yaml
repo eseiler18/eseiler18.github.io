@@ -21,14 +21,14 @@ bio:
     and wrote my Master's thesis at [Harvard University](https://iacs.seas.harvard.edu/)
     with [Prof. Pavlos Protopapas](https://pll.harvard.edu/instructor/pavlos-protopapas)
     on physics-informed neural networks for stiff differential equations. I have also worked
-    on deep learning for ophthalmology at the Jules-Gonin Eye Hospital and as a data engineer
-    at Liom.
+    on deep learning for ophthalmology at the Jules-Gonin Eye Hospital and as a data engineering
+    intern at Liom.
 
 # "For students" box on the home page (Markdown links allowed; [email] = mailto link).
 students:
   items:
     - >-
-      Students interested in a **semester project or master thesis**, please consult our
+      Students interested in a **semester project or Master's thesis**, please consult our
       [lab's project page](https://www.epfl.ch/labs/cvlab/projects/) or contact me directly by [email].
   note: >-
     Feel free to contact me! Please have a look at these resources first, and avoid sending a generic email.
