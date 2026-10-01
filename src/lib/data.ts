@@ -67,6 +67,8 @@ export interface Publication {
   date: string;
   venue: string;
   venueShort: string;
+  /** Full venue name without the year, shown in gray next to the badge. */
+  venueFull: string;
   type: string;
   doi: string;
   arxiv: string;
@@ -117,6 +119,11 @@ function bibtexFor(p: Publication): string {
 }
 
 /** "NeurIPS 2026", "Scientific Reports, 2024", or just "2025" for preprints. */
+/** Gray line of a publication card: "Scientific Reports, 2024", or just "2025" when the full
+ * name would repeat the badge (e.g. arXiv). */
+export const venueDetail = (p: Publication) =>
+  p.venueFull && p.venueFull !== p.venueShort ? `${p.venueFull}, ${p.year}` : String(p.year);
+
 export const venueLine = (p: Publication) =>
   !p.venue ? String(p.year) : /\d{4}/.test(p.venue) ? p.venue : `${p.venue}, ${p.year}`;
 
@@ -162,6 +169,7 @@ export async function getPublications(): Promise<Publication[]> {
         date: p.date ?? '',
         venue: p.venue ?? '',
         venueShort: p.venue_short ?? '',
+        venueFull: p.venue_full ?? String(p.venue ?? '').replace(/,?\s*\b(19|20)\d{2}\b/, '').trim(),
         type: p.type ?? 'paper',
         doi: p.doi ?? '',
         arxiv: p.arxiv ?? '',

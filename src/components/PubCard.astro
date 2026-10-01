@@ -1,5 +1,5 @@
 ---
-import { venueLine, type Publication } from '../lib/data';
+import { venueDetail, type Publication } from '../lib/data';
 import AuthorList from './AuthorList.astro';
 import Bibtex from './Bibtex.astro';
 
@@ -23,8 +23,8 @@ const pills = Object.entries(pub.links);
     </h3>
     <p class="meta authors-line"><AuthorList authors={pub.authors} equal={pub.equalContribution} max={compact ? 6 : 8} /></p>
     <p class="meta venue">
-      {pub.venueShort && <span class="badge">{pub.venueShort}{/\d{4}/.test(pub.venue) ? '' : ` ${pub.year}`}</span>}
-      <span class="muted">{venueLine(pub)}</span>
+      {pub.venueShort && <span class="badge">{pub.venueShort}</span>}
+      <span class="muted">{venueDetail(pub)}</span>
     </p>
     {
       !compact && (

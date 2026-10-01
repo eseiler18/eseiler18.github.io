@@ -8,7 +8,8 @@
 #   project_url: external page (e.g. the first author's project site); for
 #                papers without an internal page it is what the title links to
 #   venue:       display venue, e.g. "NeurIPS 2026"
-#   venue_short: short badge, e.g. "NeurIPS"
+#   venue_short: short badge, e.g. "NeurIPS" (red, first on publication cards)
+#   venue_full:  full venue name without year, shown in gray after the badge
 #   featured:    true -> shown on the home page
 #   hidden:      true -> not shown anywhere
 #   equal_contribution: [names], marked with *
@@ -25,6 +26,7 @@ publications:
     slug: fcso
     venue: NeurIPS 2026
     venue_short: NeurIPS
+    venue_full: Advances in Neural Information Processing Systems
     type: paper
     featured: true
     thumbnail: /projects/fcso/figure1.jpg
@@ -42,18 +44,21 @@ publications:
   stiff-transfer-learning-for-physics-informed:
     slug: stiff-transfer-pinns
     venue: arXiv
+    venue_short: arXiv
     featured: true
     thumbnail: /projects/stiff-transfer-pinns/teaser.jpg
 
   importance-of-oct-derived-biomarkers-for:
     slug: cscr-oct-biomarkers
     venue_short: Sci. Rep.
+    venue_full: Scientific Reports
     featured: true
     thumbnail: /projects/cscr-oct-biomarkers/teaser.jpg
 
   cohort-builder-a-software-pipeline-for:
     venue: Medical Informatics Europe (MIE) 2024
     venue_short: MIE
+    venue_full: Medical Informatics Europe
     thumbnail: /projects/cohort-builder/teaser.jpg
 
   test-paper-2026-09-28-1348:
