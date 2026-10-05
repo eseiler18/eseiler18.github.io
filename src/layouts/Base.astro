@@ -32,6 +32,14 @@ const person = {
     (u) => u && u.startsWith('http') && !u.includes('TODO'),
   ),
 };
+// Site name shown by Google above the result (instead of the domain owner, "GitHub").
+const website = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: profile.name,
+  alternateName: ['Emilien Seiler | PhD Student', 'eseiler18.github.io'],
+  url: Astro.site?.toString(),
+};
 const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
 const nav = [
   { href: '/', label: 'About' },
@@ -50,10 +58,14 @@ const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWi
     <meta name="description" content={desc} />
     <meta name="author" content={profile.name} />
     <link rel="canonical" href={canonical} />
+    <!-- Icons: Google search results use a square icon whose size is a multiple of 48px -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon-48.png" type="image/png" sizes="48x48" />
+    <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/icon-512.png" type="image/png" sizes="512x512" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={profile.name} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={desc} />
     <meta property="og:url" content={canonical} />
@@ -77,6 +89,7 @@ const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWi
     <link rel="sitemap" href="/sitemap.xml" />
     <meta name="google-site-verification" content="dG07hAB7Uh7u-fZqTfxHKwfncTGMEPCsS2JYD94PcwA" />
     {isHome && <script type="application/ld+json" set:html={JSON.stringify(person)} />}
+    {isHome && <script type="application/ld+json" set:html={JSON.stringify(website)} />}
     <slot name="head" />
   </head>
   <body>
