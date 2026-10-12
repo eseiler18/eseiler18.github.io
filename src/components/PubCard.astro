@@ -19,7 +19,7 @@ const pills = Object.entries(pub.links);
   }
   <div class="body">
     <h3 class="title">
-      <a href={pub.href} class:list={{ ext: pub.external }} {...extAttrs}>{pub.title}</a>
+      <a href={pub.href} {...extAttrs}>{pub.title}</a>
     </h3>
     <p class="meta authors-line"><AuthorList authors={pub.authors} equal={pub.equalContribution} max={compact ? 6 : 8} /></p>
     <p class="meta venue">
