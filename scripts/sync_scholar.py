@@ -372,6 +372,54 @@ def create_page(pub: dict, slug: str) -> None:
     print(f"    page: {path.relative_to(ROOT)}")
 
 
+# ---------------------------------------------------------------- co-author Google Scholar links
+COAUTHORS = DATA / "coauthors.yaml"
+
+
+def norm_name(name: str) -> str:
+    import unicodedata
+    n = unicodedata.normalize("NFD", name.lower())
+    return re.sub(r"[^a-z]", "", n)
+
+
+def find_scholar_profile(name: str):
+    """Google Scholar profile URL of `name`, or "" if none / ambiguous.
+    Raises if Scholar cannot be queried (blocked), so the author is retried next week."""
+    from scholarly import scholarly
+
+    matches = []
+    for i, r in enumerate(scholarly.search_author(name)):
+        if norm_name(r.get("name", "")) == norm_name(name):
+            matches.append(r)
+        if i >= 9:
+            break
+    return f"https://scholar.google.com/citations?user={matches[0]['scholar_id']}" if len(matches) == 1 else ""
+
+
+def update_coauthor_links(pubs: list[dict], variants: list[str], dry: bool) -> None:
+    """Add every author missing from coauthors.yaml, with their Scholar profile if found.
+    Existing entries (set by hand or found earlier) are never changed."""
+    known = load_yaml(COAUTHORS) or {}
+    known_norm = {norm_name(k) for k in known}
+    missing = []
+    for pub in pubs:
+        for a in pub.get("authors") or []:
+            if not is_me(a, variants) and norm_name(a) not in known_norm and a not in missing:
+                missing.append(a)
+    lines = []
+    for name in missing:
+        try:
+            url = find_scholar_profile(name)
+        except Exception as exc:  # Scholar blocked: try again next week
+            print(f"  scholar lookup failed for {name}: {exc}", file=sys.stderr)
+            continue
+        print(f"  co-author {name}: {url or '(no profile)'}")
+        lines.append(f'{name}: "{url}"')
+    if lines and not dry:
+        with COAUTHORS.open("a") as f:
+            f.write("\n".join(lines) + "\n")
+
+
 # ---------------------------------------------------------------- main
 def main() -> int:
     ap = argparse.ArgumentParser()
@@ -459,6 +507,8 @@ def main() -> int:
         else:
             PUBS_JSON.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n")
             print(f"Wrote {PUBS_JSON.relative_to(ROOT)} ({len(pubs)} publications).")
+    if cfg.get("scholar_id"):
+        update_coauthor_links([p for p in pubs if not p["id"].startswith("test-")], variants, args.dry_run)
     if args.report:
         args.report.write_text(json.dumps(report, indent=2, ensure_ascii=False))
     return 0

@@ -19,7 +19,7 @@ npm run preview
 | PDF CV (1 page) | generated from `cv.yaml` by `cv/resume.typ` (see below) |
 | Publications (**generated**, do not edit) | `src/data/publications.json` |
 | Manual corrections on publications | `src/data/publications.overrides.yaml` |
-| Co-author homepages | `src/data/coauthors.yaml` |
+| Co-author links (Google Scholar, auto-filled by the sync) | `src/data/coauthors.yaml` |
 | Paper pages | `src/content/projects/<slug>.md` + assets in `public/projects/<slug>/` |
 | Colors, fonts | `src/styles/global.css` (top of file) |
 

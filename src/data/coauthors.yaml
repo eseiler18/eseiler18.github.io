@@ -1,9 +1,31 @@
-# Co-author homepages: author names in publication lists become links.
-Pascal Fua: https://people.epfl.ch/pascal.fua
-Nicolas Talabot: https://people.epfl.ch/nicolas.talabot
-Yingxuan You: https://people.epfl.ch/yingxuan.you
-Federico Stella: https://people.epfl.ch/federico.stella
-Pavlos Protopapas: https://pll.harvard.edu/instructor/pavlos-protopapas
-Wanzhou Lei: ""
-Mattia Tomasoni: ""
-Chiara Maria Eandi: ""
+# Co-author links: author names in publication lists become links (Google Scholar profile
+# when one exists). New authors are looked up on Google Scholar by the weekly sync
+# (scripts/sync_scholar.py) and added here; an empty value means "no profile found".
+# Edit freely: existing entries are never overwritten.
+Pascal Fua: https://scholar.google.com/citations?user=kzFmAkYAAAAJ
+Nicolas Talabot: https://scholar.google.com/citations?user=f2LbcbAAAAAJ
+Yingxuan You: https://scholar.google.com/citations?user=T2e15wkAAAAJ
+Federico Stella: https://scholar.google.com/citations?user=UxEI4sQAAAAJ
+Hantao Zhang: https://scholar.google.com/citations?user=7RJH908AAAAJ
+Pavlos Protopapas: https://scholar.google.com/citations?user=hlFnwxwAAAAJ
+Wanzhou Lei: https://scholar.google.com/citations?user=YB__i2oAAAAJ
+Mattia Tomasoni: https://scholar.google.com/citations?user=uyimt2gAAAAJ
+Chiara Maria Eandi: https://scholar.google.com/citations?user=qgvU27wAAAAJ
+Ciara Bergin: https://scholar.google.com/citations?user=4f9SvPQAAAAJ
+Ilenia Meloni: https://scholar.google.com/citations?user=u-wW5lQAAAAJ
+Sepehr Mousavi: https://scholar.google.com/citations?user=gsgiQ0wAAAAJ
+Ali Garjani: https://scholar.google.com/citations?user=o_pCGL0AAAAJ
+Reinier O. Schlingemann: https://scholar.google.com/citations?user=j4Fnx4oAAAAJ
+Oliver Heinimann: ""
+Jieke Wu: ""
+Léon Delachaux: ""
+Jennifer Cattaneo: ""
+Thibaud Martin: ""
+Alexia Duriez: ""
+Jérémy Baffou: ""
+Adham Elwakil: ""
+Laurent Pierre Brock: ""
+Alexandre Pierre Dherse: ""
+Edwige Forestier: ""
+Marine Palaz: ""
+Thomas J. Wolfensberger: ""

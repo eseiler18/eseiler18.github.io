@@ -127,6 +127,31 @@ export const venueDetail = (p: Publication) =>
 export const venueLine = (p: Publication) =>
   !p.venue ? String(p.year) : /\d{4}/.test(p.venue) ? p.venue : `${p.venue}, ${p.year}`;
 
+// Known venues: [pattern, badge, full name]. Used when the overrides do not set them.
+const VENUES: [RegExp, string, string][] = [
+  [/arxiv/i, 'arXiv', 'arXiv'],
+  [/neural information processing|neurips|nips/i, 'NeurIPS', 'Advances in Neural Information Processing Systems'],
+  [/computer vision and pattern recognition|\bcvpr\b/i, 'CVPR', 'IEEE/CVF Conference on Computer Vision and Pattern Recognition'],
+  [/international conference on computer vision|\biccv\b/i, 'ICCV', 'IEEE/CVF International Conference on Computer Vision'],
+  [/european conference on computer vision|\beccv\b/i, 'ECCV', 'European Conference on Computer Vision'],
+  [/learning representations|\biclr\b/i, 'ICLR', 'International Conference on Learning Representations'],
+  [/international conference on machine learning|\bicml\b/i, 'ICML', 'International Conference on Machine Learning'],
+  [/3d vision|\b3dv\b/i, '3DV', 'International Conference on 3D Vision'],
+  [/siggraph asia/i, 'SIGGRAPH Asia', 'ACM SIGGRAPH Asia'],
+  [/siggraph|transactions on graphics/i, 'SIGGRAPH', 'ACM SIGGRAPH / Transactions on Graphics'],
+  [/scientific reports/i, 'Sci. Rep.', 'Scientific Reports'],
+  [/pattern analysis and machine intelligence|\btpami\b/i, 'TPAMI', 'IEEE Transactions on Pattern Analysis and Machine Intelligence'],
+];
+
+/** Short badge and full name (without year) for a raw venue string from Scholar/OpenAlex. */
+function venueParts(venue: string): { short: string; full: string } {
+  const full = venue.replace(/\(([^)]*)\)/g, (m, inner) => (/\d{4}/.test(inner) ? '' : m)).replace(/,?\s*\b(19|20)\d{2}\b/g, '').trim();
+  const known = VENUES.find(([re]) => re.test(venue));
+  if (known) return { short: known[1], full: known[2] };
+  const acronym = venue.match(/\(([A-Z][A-Za-z0-9-]{1,10})(?:\s+\d{4})?\)/);
+  return { short: acronym?.[1] ?? '', full };
+}
+
 let cache: Publication[] | undefined;
 
 /** Publications from the sync, merged with manual overrides, newest first. */
@@ -168,8 +193,10 @@ export async function getPublications(): Promise<Publication[]> {
         year: p.year,
         date: p.date ?? '',
         venue: p.venue ?? '',
-        venueShort: p.venue_short ?? '',
-        venueFull: p.venue_full ?? String(p.venue ?? '').replace(/,?\s*\b(19|20)\d{2}\b/, '').trim(),
+        // Badge + full name are derived automatically for new papers (see venueParts) and
+        // can be overridden with venue_short / venue_full.
+        venueShort: p.venue_short ?? venueParts(p.venue ?? '').short,
+        venueFull: p.venue_full ?? venueParts(p.venue ?? '').full,
         type: p.type ?? 'paper',
         doi: p.doi ?? '',
         arxiv: p.arxiv ?? '',
@@ -197,11 +224,11 @@ export async function getPublications(): Promise<Publication[]> {
         hasPage,
       };
       pub.bibtex = (o.bibtex as string | undefined)?.trim() ?? bibtexFor(pub);
-      // Preprints: no "arXiv preprint" label on the site unless the overrides set a `venue`.
-      // The BibTeX above still cites them properly.
+      // Preprints are shown as "arXiv" (never "arXiv preprint"), like every other venue badge.
       if (isPreprint(pub) && !o.venue) {
-        pub.venue = '';
-        pub.venueShort = '';
+        pub.venue = 'arXiv';
+        pub.venueShort = 'arXiv';
+        pub.venueFull = 'arXiv';
       }
       return pub;
     })
