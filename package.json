@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "astro": "^7.3.5",
-    "js-yaml": "^5.4.2"
+    "js-yaml": "^5.5.0"
   },
   "devDependencies": {
     "@fortawesome/free-brands-svg-icons": "^7.3.1",
