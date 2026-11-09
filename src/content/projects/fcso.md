@@ -5,7 +5,7 @@ teaser:
   src: /projects/fcso/figure1.jpg
   caption: "(a) Manifold drift: gradient descent reduces bike compliance and car drag, but the shapes stop being valid. (b) FCSO reaches the same objective values while the shapes stay valid. (c) FCSO alternates gradient descent (GD) steps and flow-matching (FM) corrections, shown here for volume reduction."
 video:
-  src: /projects/fcso/fcso_explainer_v3.mp4
+  src: /projects/fcso/fcso_explainer_v4.mp4
   poster: /projects/fcso/poster_v2.jpg
   caption: "A 2.5-minute explainer of manifold drift and FCSO (with voice-over and captions)."
 comparisons:
@@ -47,7 +47,7 @@ At the same objective value, FCSO produces the most realistic shapes compared to
 |---|---:|---:|---:|---:|---:|---:|
 | Chair volume −70% (3DShape2VecSet) | 88.1 | 43.1 | 56.9 | 91.7 | 32.7 | **31.8** |
 | Car drag −30% (3DShape2VecSet) | 132.8 | 100.2 | 108.8 | 101.7 | 107.7 | **89.1** |
-| Bicycle compliance −80% (Hunyuan3D) | 43.1 | 28.8 | OOM | 26.8 | 28.8 | **21.3** |
+| Bicycle compliance −85% (Hunyuan3D) | 43.1 | 47.3 | OOM | 47.4 | 21.1 | **20.7** |
 | Chair compliance −65% (Hunyuan3D) | 68.2 | 55.7 | OOM | 55.9 | 55.1 | **41.3** |
 
 </div>
