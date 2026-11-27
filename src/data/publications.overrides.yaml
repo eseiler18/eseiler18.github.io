@@ -14,7 +14,7 @@
 #   hidden:      true -> not shown anywhere
 #   equal_contribution: [names], marked with *
 #   thumbnail:   image path under public/
-#   links:       { code: ..., video: ..., pdf: ..., slides: ..., poster: ... }
+#   links:       { code: ..., data: ..., video: ..., pdf: ..., slides: ..., poster: ... }
 #   bibtex:      full BibTeX string (otherwise generated automatically)
 #   title / authors / year: overwrite what the sync found
 #
@@ -31,8 +31,9 @@ publications:
     featured: true
     thumbnail: /projects/fcso/figure1.jpg
     links:
+      code: https://github.com/eseiler18/fcso
+      data: https://huggingface.co/datasets/eseiler18/fcso-assets
       video: /projects/fcso#video
-      code: ""          # TODO: code repository
     bibtex: |
       @inproceedings{seiler2026fcso,
         title     = {Flow-Corrected Shape Optimization: Taming Manifold Drift in High-Dimensional 3D Models},
